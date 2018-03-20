@@ -1,33 +1,285 @@
+MPR = CreateFrame("frame","MPRFrame")
+MPR.Version = "v2.90R"
+--MPR.Special = {"Deathwing:Herbaliist:A"}
+MPR.VersionNotes = {"Death reporting fixed, no more false information", "Timer options", "Ruby Sanctum timers"}
+local ClassColors = {["DEATHKNIGHT"] = "C41F3B", ["DEATH KNIGHT"] = "C41F3B", ["DRUID"] = "FF7D0A", ["HUNTER"] = "ABD473", ["MAGE"] = "69CCF0", ["PALADIN"] = "F58CBA",
+                     ["PRIEST"] = "FFFFFF", ["ROGUE"] = "FFF569", ["SHAMAN"] = "0070DE", ["WARLOCK"] = "9482C9", ["WARRIOR"] = "C79C6E"}
+local InstanceShortNames = {["Icecrown Citadel"] = "ICC", ["Vault of Archavon"] = "VOA", ["Trial of the Crusader"] = "TOC", ["Naxxramas"] = "NAXX", ["The Ruby Sanctum"] = "RS"}
+MPR.BossData = {
+    -- Icecrown Citadel
+    [0] = {["ENCOUNTER"] = "N/a", ["MSG_START"] = nil, ["MSG_FINISH"] = nil},
+    [1] = {
+        ["ENCOUNTER"] = "Lord Tuétano",
+        ["MSG_START"] = "The Scourge will wash over this world as a swarm of death and destruction!",
+        ["MSG_FINISH"] = "Solo veo... oscuridad.",
+        ["BERSERK"] = 600,
+    },
+    [2] = {
+        ["ENCOUNTER"] = "Lady Susurramuerte",
+        ["MSG_START"] = "¿Qué es este alboroto? ¿Osáis entrar en suelo sagrado? ¡Este será vuestro lugar de reposo final!",
+        ["MSG_FINISH"] = "Todo es parte del plan del maestro... Tu final es inevitable...",
+        ["BERSERK"] = 600,
+    },
+    [3] = {
+        ["ENCOUNTER"] = "Gunship Battle",
+        ["MSG_START"] = "Fire up the engines! We got a meetin' with destiny, lads!",
+        ["MSG_START_2"] = "Rise up, sons and daughters of the Horde! Today we battle a hated enemy of the Horde! LOK'TAR OGAR! Kor'kron, take us out!",
+        ["MSG_FINISH"] = "Damage control! Put those fires out! You haven't seen the last of the Horde!",
+        ["MSG_FINISH_2"] = "The Alliance falter. Onward to the Lich King!",
+    },
+    [4] = {
+        ["ENCOUNTER"] = "Libramorte Colmillosauro",
+        ["MSG_START"] = "¡POR EL PODER DEL REY EXÁNIME!",
+        ["MSG_FINISH"] = "Me... he... liberado...",
+        ["BERSERK"] = 480,
+        ["BERSERK_HC"] = 360,
+    },
+    [5] = {
+        ["ENCOUNTER"] = "Panzachancro",
+        ["MSG_START"] = "¿A divertirse?",
+        ["MSG_FINISH"] = "Pa... pi...",
+        ["BERSERK"] = 300,
+    },
+    [6] = {
+        ["ENCOUNTER"] = "Carapútrea",
+        ["MSG_START"] = "¡Buenas noticias, amigos! He arreglado las tuberías de babosas venenosas.",
+        ["MSG_FINISH"] = "Malas noticias, papá...",
+        ["START_DELAY"] = -3,
+    },
+    [7] = {
+        ["ENCOUNTER"] = "Profesor Putricidio",
+        ["MSG_START"] = "Buenas noticias, amigos! Creo que he perfeccionado una plaga que destruirá toda la vida en Azeroth.",
+        ["MSG_FINISH"] = "Malas noticias, amigos... No creo que sobreviva...",
+        ["BERSERK"] = 600,
+    },
+    [8] = {
+        ["ENCOUNTER"] = "Blood Prince Council",
+        ["MSG_START"] = "Naxxanar was merely a setback! With the power of the orb, Valanar will have his vengeance!",
+        ["MSG_FINISH"] = "...why...?",
+        ["BERSERK"] = 600,
+    },
+    [9] = {
+        ["ENCOUNTER"] = "Reina de Sangre Lana'thel",
+        ["MSG_START"] = "Habéis tomado una... decisión... incorrecta.", -- "You have made an... unwise... decision." not used on Molten?
+        ["MSG_FINISH"] = "Pero... si nos caiamos... tan... bien...",
+        ["START_DELAY"] = -15,
+        ["BERSERK"] = 330,
+    },
+    [10] = {
+        ["ENCOUNTER"] = "Valithria Dreamwalker",
+        ["MSG_START"] = "Heroes, lend me your aid! I... I cannot hold them off much longer! You must heal my wounds!",
+        ["BERSERK_HC"] = 420,
+    },
+    [11] = {
+        ["ENCOUNTER"] = "Sindragosa",
+        ["MSG_START"] = "¡Estáis locos por haber venido aquí! Los vientos helados de Rasganorte consumirán vuestras almas.",
+        ["MSG_FINISH"] = "Libre... al fin...",
+        ["BERSERK"] = 600,
+    },
+    [12] = {
+        ["ENCOUNTER"] = "El Rey Exánime",
+        ["MSG_START"] = "Te mantendré vivo para presenciar el final, Vadín. No me gustaría que el mejor campeón de la Luz se perdiera ver este misero mundo hecho a mi imagen.",
+        ["MSG_FINISH"] = nil,
+        ["BERSERK"] = 900,
+    },
+    -- Trial of the Crusader
+    [13] = {
+        ["ENCOUNTER"] = "Gormok the Impaler",
+        ["MSG_START"] = "Hailing from the deepest, darkest carverns of the storm peaks, Gormok the Impaler! Battle on, heroes!",
+        ["MSG_FINISH"] = "Steel yourselves, heroes, for the twin terrors Acidmaw and Dreadscale. Enter the arena!",
+    },
+    [14] = {
+        ["ENCOUNTER"] = "Jormungar Twins",
+        ["MSG_START"] = "Steel yourselves, heroes, for the twin terrors Acidmaw and Dreadscale. Enter the arena!",
+        ["MSG_FINISH"] = "The air freezes with the introduction of our next combatant, Icehowl! Kill or be killed, champions!",
+    },
+    [15] = {
+        ["ENCOUNTER"] = "Icehowl",
+        ["MSG_START"] = "The air freezes with the introduction of our next combatant, Icehowl! Kill or be killed, champions!",
+        ["MSG_FINISH"] = nil,
+    },
+    [16] = {
+        ["ENCOUNTER"] = "Lord Jaraxxus",
+        ["MSG_START"] = "You face Jaraxxus, eredar lord of the Burning Legion!", "Another will take my place. Your world is doomed.",
+        ["MSG_FINISH"] = nil,
+    },
+    [17] = {
+        ["ENCOUNTER"] = "Faction Champions",
+        ["MSG_START"] = "GLORY OF THE ALLIANCE!",
+        ["MSG_FINISH"] = "A shallow and tragic victory. We are weaker as a whole from the losses suffered today. Who but the Lich King could benefit from such foolishness? Great warriors have lost their lives. And for what? The true threat looms ahead - the Lich King awaits us all in death.",
+    },
+    [18] = {
+        ["ENCOUNTER"] = "Val'kyr Twins",
+        ["MSG_START"] = "In the name of our dark master. For the Lich King. You. Will. Die.",
+        ["MSG_FINISH"] = "The Scourge cannot be stopped...",
+    },
+    [19] = {
+        ["ENCOUNTER"] = "Anub'arak",
+        ["MSG_START"] = "Ahhh, our guests have arrived, just as the master promised.",
+        ["MSG_FINISH"] = nil,
+    },
+    -- Ruby Sanctum
+    [20] = {
+        ["ENCOUNTER"] = "Saviana Ragefire",
+        ["MSG_START"] = "You will sssuffer for this intrusion!",
+        ["MSG_FINISH"] = nil,
+    },
+    [21] = {
+        ["ENCOUNTER"] = "Baltharus the Warborn",
+        ["MSG_START"] = "Ah, the entertainment has arrived.",
+        ["MSG_FINISH"] = "I... Didn't see that coming...",
+    },
+    [22] = {
+        ["ENCOUNTER"] = "General Zarithrian",
+        ["MSG_START"] = "Alexstrasza has chosen capable allies... A pity that I must END YOU!",
+        ["MSG_FINISH"] = "HALION! I...",
+    },
+    [23] = {
+        ["ENCOUNTER"] = "Halion",
+        ["MSG_START"] = "Vuestro mundo está al borde de la aniquilación. ¡TODOS seréis testigos de la llegada de una nueva era de DESTRUCCIÓN!",
+        ["MSG_FINISH"] = "Disfrutad la victoria, mortales, porque será la última. ¡Este mundo arderá cuando vuelva el maestro!",
+        ["BERSERK"] = 480,
+    },
+}
+local BossNames = {}
+local ChestLoot = {
+    ["Gunship Armory"] = {
+        "Frost Giant's Cleaver", "Midnight Sun", "Muradin's Spyglass", "Neverending Winter", "Pauldrons of Lost Hope", "Bone Drake's Enameled Boots", "Icecrown Rampart Bracers", "Saronite Gargoyle Cloak", "Ice-Reinforced Vrykul Helm", "Bracers of Pale Illumination", "Abomination's Bloody Ring", "Cord of Dark Suffering",
+        "Corpse Tongue Coin", "Ring of Rapid Ascent", "Amulet of the Silent Eulogy", "Althor's Abacus", "Ikfirus' Sack of Wonder", "Gunship Captain's Mittens", "Shadowvault Slayer's Cloak", "Boots of Unnatural Growth", "Scourgeborne Waraxe", "Skeleton Lord's Circle", "Shadowfrost Shard", "Polar Bear Claw Bracers", "Scourge Hunter's Vambraces", "Boneguard Commander's Pauldrons", "Corp'rethar Ceremonial Crown", "Waistband of Righteous Fury",
+    },
+    ["Deathbringer's Cache"] = {
+        "Ramaladni's Blade of Culling", "Mag'hari Chieftain's Staff", "Soulcleave Pendant", "Saurfang's Cold-Forged Band", "Icecrown Spire Sandals", "Scourge Stranglers", "Hauberk of a Thousand Cuts", "Blade-Scored Carapace", "Deathforged Legplates", "Leggings of Unrelenting Blood", "Thaumaturge's Crackling Cowl", "Gargoyle Spit Bracers", 
+        "Deathbringer's Will", "Bloodvenom Blade", "Toskk's Maximized Wristguards", "Belt of the Blood Nova", "Greatcloak of the Turned Champion",
+    },
+    ["Cache of the Dreamwalker"] = {
+        "Oxheart", "Lich Wrappings", "Sister Svalna's Aether Staff", "Skinned Whelp Shoulders", "Taiga Bindings", "Dreamhunter's Carbine", "Emerald Saint's Spaulders", "Legguards of the Twisted Dream", "Stormbringer Gloves", "Sister Svalna's Spangenhelm", "Leggings of the Refracted Mind", "Ironrope Belt of Ymirjar", 
+        "Frostbinder's Shredded Cape", "Scourge Reaver's Legplates", "Coldwraith Links", "Lungbreaker", "Noose of Malachite", "Frostbrood Sapphire Ring", "Primordial Saronite", "Robe of the Waking Nightmare", "Nightmare Ender", "Snowstorm Helm", "Grinning Skull Greatboots", "Shadowfrost Shard", "Anub'ar Stalker's Gloves", "Devium's Eternally Cold Ring", "Leggings of Dying Candles", "Boots of the Funeral March", "Bracers of Eternal Dreaming", 
+    },
+}
+local EncounterStartYells = {}
+local EncounterDoneYells = {}
+local EncounterNames = {}
+local BossYells = {
+    ["Watch as the world around you collapses!"]        = "Quake! Run inside!!",
+    ["¡Los cielos arden!"]                               = "Meteor Strike",
+    ["Beware the shadoww"]                              = "Twilight Cutter in 5 sec. Watch orbs!",
+    ["Creo que popó enfadado. ¡Va a hacer boom!"] = "OOZE EXPLOSION! Run away!!",
+    ["We're taking hull damage, get a battle-mage out here to shut down those cannons!"] = "MAGE SPAWNED!!",
+    ["We're taking hull damage, get a sorcerer out here to shut down those cannons!"] = "MAGE SPAWNED!!",
+}
+local BossRaidYells = {
+    ["Creo que popó enfadado. ¡Va a hacer boom!"]                                  = "Ooze Explosion in 4 sec. Run away!!",
+    ["We're taking hull damage, get a battle-mage out here to shut down those cannons!"] = "MAGE SPAWNED on Horde ship! Kill him!!",
+    ["We're taking hull damage, get a sorcerer out here to shut down those cannons!"]    = "MAGE SPAWNED on Alliance ship! Kill him!!",
+}
+local RaidDifficulty = {[1] = "10n",[2] = "25n",[3] = "10h",[4] = "25h"}
 
+local ClassBIS = {
+--    ["Class"] = {
+--        ["Spec1"] = {ItemName1, ItemName2, ItemName3},
+--        ["Spec2"] = {...},
+--        ["Spec3"] = {...},
+--    },
+    ["Paladin"] = {
+        ["Retribution"] = {"Penumbra Pendant", "Shadowvault Slayer's Cloak", "Polar Bear Claw Bracers", "Umbrage Armbands", "Fleshrending Gauntlets", "Astrylian's Sutured Cinch", "Apocalypse's Advance", "Signet of Twilight", "Sharpened Twilight Scale", "Tiny Abomination in a Jar", "Oathbinder, Charge of the Ranger-General"},
+        ["Holy"] = {"Blood Queen's Crimson Choker", "Cloak of Burning Dusk", "Mail of Crimson Coins", "Bracers of Fiery Night", "Unclean Surgical Gloves", "Split Shape Belt", "Plaguebringer's Stained Pants", "Foreshadow Steps", "Marrowgar's Frigid Eye", "Solace of the Defeated", "Bulwark of Smouldering Steel", "Bloodsurge, Kel'Thuzad's Blade of Agony"},
+        ["Protection"] = {"Bile-Encrusted Medallion", "Sentinel's Winter Cloak", "Gargoyle Spit Bracers", "Verdigris Chain Belt", "Pillars of Might", "Grinning Skull Greatboots", "Devium's Eternally Cold Ring", "Band of the Twin Val'kyr", "Satrina's Impeding Scarab", "Sindragosa's Flawless Fang", "Mithrios, Bronzebeard's Legacy", "Icecrown Glacial Wall"},
+    },
+    ["Priest"] = {
+        ["Shadow"] = {"Amulet of the Silent Eulogy", "Cloak of Burning Dusk", "Bracers of Fiery Night", "Crushing Coldwraith Belt", "Plaguebringer's Stained Pants", "Plague Scientist's Boots", "Ring of Rapid Ascent", "Ring of Rapid Ascent", "Dislodged Foreign Object", "Phylactery of the Nameless Lich", "Royal Scepter of Terenas II", "Shadow Silk Spindle", "Corpse-Impaling Spike"},
+        ["Holy"] = {"Sentinel's Amulet", "Greatcloak of the Turned Champion", "Sanguine Silk Robes", "Death Surgeon's Sleeves", "Circle of Ossus", "Boots of the Mourning Widow", "Memory of Malygos", "Solace of the Defeated", "Althor's Abacus", "Frozen Bonespike", "Sundial of Eternal Dusk", "Nightmare Ender"},
+        ["Discipline"] = {},
+    },
+    ["Rogue"] = {
+        ["Assassination"] = {"Sindragosa's Cruel Claw", "Cultist's Bloodsoaked Spaulders", "Shadowvault Slayer's Cloak", "Ikfirus' Sack of Wonder", "Umbrage Armbands", "Belt of the Merciless Killer", "Frostbitten Fur Boots", "Band of the Bone Colossus", "Tiny Abomination in a Jar", "Herkuml War Token", "Heaven's Fall, Kryss of a Thousand Lies", "Lungbreaker", "Gluth's Fetching Knife"},
+        ["Combat"] = {"Sindragosa's Cruel Claw", "Shadowvault Slayer's Cloak", "Ikfirus' Sack of Wonder", "Toskk's Maximized Wristguards", "Aldriana's Gloves of Secrecy", "Astrylian's Sutured Cinch", "Gangrenous Leggings", "Frostbrood Sapphire Ring", "Deathbringer's Will", "Whispering Fanged Skull", "Bloodvenom Blade", "Scourgeborne Waraxe", "Stakethrower"},
+    },    
+    ["Shaman"] = {
+        ["Restoration"] = {"Blood Queen's Crimson Choker", "Frostbinder's Shredded Cape", "Bloodsunder's Bracers", "Crushing Coldwraith Belt", "Plague Scientist's Boots", "Ring of Rapid Ascent","Althor's Abacus", "Glowing Twilight Scale", "Trauma", "Bulwark of Smouldering Steel"},
+        ["Enhancement"] = {"Precious' Putrid Collar", "Shadowvault Slayer's Cloak", "Umbrage Armbands", "Anub'ar Stalker's Gloves", "Nerub'ar Stalker's Cord", "Returning Footfalls", "Band of the Bone Colossus", "Sharpened Twilight Scale", "Havoc's Call, Blade of Lordaeron Kings"},
+        ["Elemental"] = {"Blood Queen's Crimson Choker", "Cloak of Burning Dusk", "Bracers of Fiery Night", "Gunship Captain's Mittens", "Split Shape Belt", "Plaguebringer's Stained Pants", "Plague Scientists Boots", "Ring of Rapid Ascent", "Dislodged Foreign Object", "Charred Twilight Scale", "Phylactery of the Nameless Lich", "Royal Scepter of Terenas II", "Bulwark of Smouldering Steel"},
+    },
+    ["Druid"] = {
+        ["Restoration"] = {"Bone Sentinel's Amulet", "Greatcloak of the Turned Champion", "Sanguine Silk Robes", "Bracers of Eternal Dreaming", "Professor's Bloodied Smock", "Memory of Malygos", "Solace of the Defeated", "Althor's Abacus", "Trauma", "Sundial of Eternal Dusk"},
+        ["Feral-D."] = {"Penumbra Pendant", "Toskk's Maximized Wristguards", "Aldriana's Gloves of Secrecy", "Astrylian's Sutured Cinch", "Frostbrood Sapphire Ring", "Deathbringer's Will", "Sharpened Twilight Scale", "Oathbinder, Charge of the Ranger-General"},
+        ["Feral-T."] = {"Royal Crimson Cloak", "Ikfirus's Sack of Wonder", "Footpads of Impending Death", "Devium's Eternally Cold Ring", "Bloodfall", "Frostbitten Fur Boots", "Bile-Encrusted Medallion", "Sindragosa's Flawless Fang", "Umbrage Armbands", "Astrylian's Sutured Cinch"},    
+        ["Balance"] = {"Blood Queen's Crimson Choker", "Cloak of Burning Dusk", "Bracers of Fiery Night", "Crushing Coldwraith Belt", "Plaguebringer's Stained Pants", "Plague Scientist's Boots", "Valanar's Other Signet Ring", "Royal Scepter of Terenas II", "Shadow Silk Spindle"},
+    },
+    ["Death Knight"] = {
+        ["Blood-D."] = {"Lana'thel's Chain of Flagellation", "Winding Sheet", "Polar Bear Claw Bracers", "Coldwraith Links", "Blood-Soaked Saronite Stompers", "Might of Blight", "Deathbringer's Will", "Death's Choice", "Bryntroll, the Bone Arbiter"},
+        ["Unholy-D."] = {"Scourge Reaver's Legplates", "Lana'thel's Chain of Flagellation", "Winding Sheet", "Polar Bear Claw Bracers", "Coldwraith Links", "Blood-Soaked Saronite Stompers", "Might of Blight", "Deathbringer's Will", "Death's Choice", "Oathbinder, Charge of the Ranger-General"},
+        ["Frost-D."] = {"Fleshrending Gauntlets", "Lana'thel's Chain of Flagellation", "Winding Sheet", "Polar Bear Claw Bracers", "Coldwraith Links", "Blood-Soaked Saronite Stompers", "Might of Blight", "Deathbringer's Will", "Death's Choice", "Havoc's Call, Blade of Lordaeron Kings"},
+    },
+    ["Hunter"] = {
+        ["Marksmanship"] = {"Sindragosa's Cruel Claw", "Toskk's Maximized Wristguards", "Nerub'ar Stalker's Cord", "Leggings of Northern Lights", "Frostbrood Sapphire Ring", "Sharpened Twilight Scale", "Deathbringer's Will", "Oathbinder, Charge of the Ranger-General", "Fal'inrush, Defender of Quel'thalas"},
+    },
+    ["Mage"] = {
+        ["Fire"] = {"Blood Queen's Crimson Choker", "Cloak of Burning Dusk", "Robe of the Waking Nightmare", "Bracers of Fiery Night", "Crushing Coldwraith Belt", "Plague Scientist's Boots", "Ring of Rapid Ascent", "Phylactery of the Nameless Lich", "Charred Twilight Scale", "Bloodsurge, Kel'Thuzad's Blade of Agony", "Shadow Silk Spindle", "Corpse-Impaling Spike"},
+        ["Arcane"] = {"Amulet of the Silent Eulogy", "Cloak of Burning Dusk", "Bracers of Fiery Night", "San'layn Ritualist Gloves", "Crushing Coldwraith Belt", "Plague Scientist's Boots", "Ring of Rapid Ascent", "Charred Twilight Scale", "Dislodged Foreign Object", "Bloodsurge, Kel'Thuzad's Blade of Agony", "Shadow Silk Spindle", "Corpse-Impaling Spike"},
+    },
+    ["Warlock"] = {
+        ["Affliction"] = {"Blood Queen's Crimson Choker", "Frostbinder's Shredded Cape", "The Lady's Brittle Bracers", "Crushing Coldwraith Belt", "Plaguebringer's Stained Pants", "Plague Scientist's Boots", "Memory of Malygos", "Dislodged Foreign Object", "Phylactery of the Nameless Lich", "Bloodsurge, Kel'Thuzad's Blade of Agony", "Shadow Silk Spindle", "Corpse-Impaling Spike"},
+        ["Demonology"] = {},
+        ["Destruction"] = {"Sanctified Dark Coven Hood", "Amulet of the Silent Eulogy", "Cloak of Burning Dusk", "Bracers of Fiery Night", "Crushing Coldwraith Belt", "Plaguebringer's Stained Pants", "Plague Scientist's Boots", "Valanar's Other Signet Ring", "Dislodged Foreign Object", "Charred Twilight Scale", "Bloodsurge, Kel'Thuzad's Blade of Agony", "Shadow Silk Spindle", "Corpse-Impaling Spike"},
+    },
+    ["Warrior"] = {
+        ["Fury"] = {"Lana'thel's Chain of Flagellation", "Shawl of Nerubian Silk", "Toskk's Maximized Wristguards", "Aldriana's Gloves of Secrecy", "Astrylian Suttered Cinch", "Frostbitten Fur Boots", "Frostbrood Saphire Ring", "Sharpened Twilight Scale", "Deathbringer's Will", "Cryptmaker", "Stakethrower"},
+        ["Protection"] = {"Troggbane, Axe of the Frostborne King", "Icecrown Glacial Wall", "Bile-Encrusted Medallion", "Royal Crimson Cloak", "Bracers of Dark Reckoning", "Taldaram's Plated Fists", "Grinning Skull Greatboots", "Juggernaut Band", "Sindragosa's Flawless Fang", "Dreamhunter's Carbine"},
+    },
+}
 
-local npcsBossSpellSumon = {"Vengeful Shade"} -- Boss summons, destination is unknown. ("Dark Nucleus" summoned every second - spam)
+------ You can change these settings! ------
+-- Created objects --
+--| Output: Player prepares [Spell]. |--
+local spellsCreate = {["Festín Grande"] = 180, ["Festín de Pescado"] = 180, ["Ritual de Almas"] = 120, ["Ritual de Refrigerio"] = 180}
+
+-- Damage & Healing --
+--| Output: [Spell] hits Target for Amount [(Critical)]. |--
+local spellsDamage = {}
+local spellsPeriodicDamage = {"Peste necrótica"}
+--| Output: [Spell] heals Target for Amount [(Critical)]. |--
+local spellsHeal = {"Runa sangrienta"}
+local spellsPeriodicHeal = {}
+--| Output: [Spell] hits: Target1 (Amount3), Target2 (Amount3), Target3 (Amount3), ... |--
+--| Filter: UnitIsPlayer(Target)
+local spellsAOEDamage = {"Martirio oscuro", "Cuchilla de las Sombras", "Explosión de escalofrío mortal", "Explosión vengativa", "Erupción de mocos", "Moco maleable", "Explosión de gas asfixiante", "Bomba de Escarcha", "Frío virulento", "Profanar", "Trampa de las sombras", "Trample", "Machaque de cola","Contragolpe"}
+--| Output: Player damages Target with [Spell]. |--
+local reportDamageOnTarget = {}
+
+-- Summons (SPELL_SUMMON) --
+--| Output: Unit summons Target. [Spell] |--
+local npcsSpellSumon = {"Raudal de mocos"}
+--| Output: Target summoned. [Spell] |--
+local npcsBossSpellSumon = {"Sombra vengativa"} -- Boss summons, destination is unknown. ("Dark Nucleus" summoned every second - spam)
 
 -- Casts (SPELL_CAST_START and SPELL_CAST_SUCCESS) --
 --| Output: Unit casts [Spell]. |--
-local spellsCast = {"Remorseless Winter", "Quake", "Dark Vortex", "Light Vortex", "Blessing of Forgotten Kings", "Runescroll of Fortitude", "Drums of the Wild"}
+local spellsCast = {"Remorseless Winter", "Quake", "Dark Vortex", "Light Vortex", "Blessing of Forgotten Kings", "Drums of the Wild"}
 --| Output: Unit casts [Spell] on Target. |--
-local spellsCastOnTarget = {"Estimular", "Renacer", "Mano de sacrificio", "Secretos del oficio", "Redirección"}
+local spellsCastOnTarget = {"Estimular", "Renacer", "Mano de sacrificio", "Supresión de dolor", "Ángel guardián"}
 --| Output: [Spell] on Target. |--
-local spellsBossCastOnTarget = {"Rune of Blood", "Vile Gas", "Swarming Shadows", "Necrotic Plague", "Soul Reaper"} -- If sourceName isn't important (ex. Boss casting).
+local spellsBossCastOnTarget = {"Runa sangrienta", "Gas inmundo", "Sombras enjambradoras", "Peste Necrótica", "Segador de Almas"} -- If sourceName isn't important (ex. Boss casting).
 
 -- Auras (SPELL_AURA_APPLIED, SPELL_AURA_APPLIED_DOSE, SPELL_AURA_STOLEN) --
 --| Output: [Spell] applied on Target. |--
 --| Filter: UnitIsPlayer(Target)
-local aurasAppliedOnTarget = {"Volatile Ooze Adhesive", "Gaseous Bloat", "Unbound Plague", "Soul Consumption", "Fiery Combustion", "Piel de corteza", "Instintos de supervivencia", "Égida de Dalaran", "Defensa iracunda", "Amplificar magia", "Defensor Candente"}
+local aurasAppliedOnTarget = {"Moco adhesivo volátil", "Hinchazón gaseosa", "Consumo de alma", "Combustión ígnea", "Reencarnación", "Defensor candente"}
+-- "Piel de corteza", "Instintos de supervivencia", "Égida de Dalaran", "Defensa iracunda",
+
 --| Output: [Spell] applied on Target1, Target2, Target3 ... |--
-local aurasAppliedOnTargets = {"Impaled", "Gas Spore", "Vile Gas", "Frost Beacon"} 
+local aurasAppliedOnTargets = {"Empalado", "Espora de gas", "Vile Gas", "Señal de Escarcha"} 
 -- MPR.DB.SayYells = true
 local sayAuraOnMe = {
-    ["Impaled"] = "Bone Spike on me! Kill it fast!!",
-    ["Dominate Mind"] = "Dominate Mind on me! Don't kill me!!",
-    ["Volatile Ooze Adhesive"] = "Green on me!",
-    ["Gaseous Bloat"] = "Orange on me!",
-    ["Essence of the Blood Queen"] = "I was biten!",
-    ["Frenzied Bloodthirst"] = "I have to bite!!",
-    ["Frost Beacon"] = "Frost Beacon on me!",
+    ["Empaladooo"] = "Bone Spike on me! Kill it fast!!",
+    ["Dominar mente"] = "Dominate Mind on me! Don't kill me!!",
+    ["Moco adhesivo volátil"] = "Moco verde en mi!",
+    ["Hinchazón gaseosa"] = "Moco naranja en mi!",
+    ["Esencia de la Reina de Sangre"] = "I was biten!",
+    ["Sed de sangre frenética"] = "I have to bite!!",
+    ["Señal de Escarcha"] = "Señal de Escarcha en mi!",
 }
 --| Output: Target has Amount stacks of [Spell]. |--
-local stackAppliedOnTarget = {"Unstable Ooze", "Cleave Armor"}
+local stackAppliedOnTarget = {"Moco inestable", "Rajar armadura"}
 --| Output: Player steals [Spell] from Target. |--
 -- MPR.DB.ReportAurasStolen = true
 
@@ -312,7 +564,7 @@ local function TimerHandler(name, ...)
     elseif contains(spellsCreate,name,true) then
         local SPELL = ...
         MPR:HandleReport(string.format("%s expires in 30 seconds.",spell(SPELL,true)), string.format("%s expires in 30 seconds.",spell(SPELL)))
-    elseif name == "Bloodbolt Splash" then
+    elseif name == "Salpicadura de descarga de sangre" then
         local SPELL = ...
         local self = {}
         local raid = {}
@@ -349,7 +601,7 @@ function MPR:RegisterEvents()
 end
 
 function MPR:CHAT_MSG_RAID_BOSS_EMOTE(message,npc)
-    if npc == "Professor Putricide" and message:find("Malleable Goo") then
+    if npc == "Profesor Putricidio" and message:find("Moco maleable") then
         MPR_Timers:MalleableGoo()
     end
 end
@@ -751,7 +1003,7 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
     end
     
     -- Check if Blood-Queen Lana'thel or Halion encounter started ...
-    if destName == "Blood-Queen Lana'thel" and not Combat and event:find("DAMAGE") then
+    if destName == "Reina de Sangre Lana'thel" and not Combat and event:find("DAMAGE") then
         MPR:StartCombat(9)
     elseif destName == "Halion" and not Combat and event:find("DAMAGE") then
         MPR:StartCombat(23)
@@ -761,9 +1013,9 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
     if event == "SWING_DAMAGE" then
         local amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing = select(9, ...)
         
-        if sourceName == "Vengeful Shade" and UnitIsPlayer(destName) then
-            self:SelfReport(string.format("%s failed to run from %s",unit(destName),unit(sourceName)))
-            self:RaidReport(string.format("%s failed to run from %s",destName,sourceName))
+        if sourceName == "Sombra vengativa" and UnitIsPlayer(destName) then
+            --self:SelfReport(string.format("%s failed to run from %s",unit(destName),unit(sourceName)))
+            self:HandleReport(string.format("%s failed to run from %s",destName,sourceName))
         elseif contains(reportDamageOnTarget,destName) then
             self:ReportDamageOnTarget(sourceName,destName,spellId)
         end
@@ -798,50 +1050,47 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
         local spellId, spellName, spellSchool = select(9, ...)
         
         if event == "SPELL_AURA_REMOVED" then
-            if sourceName == "Lady Deathwhisper" then
-                if spellName == "Mana Barrier" then
+            if sourceName == "Lady Susurramuerte" then
+                if spellName == "Barrera de maná" then
                     MPR_Timers:ManaBarrierRemoved()
                 end
             end
         elseif event == "SPELL_CAST_START" or event == "SPELL_CAST_SUCCESS" then
-			if spellName == "Misdirection" and UnitInRaid(sourceName) then
-				self:ReportCastOnTarget(sourceName, destName, spellId)
-			end
 			
-            -- 1: Lord Marrowgar timers
-            if sourceName == "Lord Marrowgar" then
+            -- 1: Lord Tuétano timers
+            if sourceName == "Lord Tuétano" then
                 if spellName == "Bone Spike Graveyard" then
                     MPR_Timers:BoneSpikeGraveyard()
                     --self:RaidWarning(string.format("{rt8} Kill spikes!! {rt8}"))
-                elseif spellName == "Bone Storm" then
+                elseif spellName == "Tormenta ósea" then
                     MPR_Timers:BoneStorm()
                 end
-            -- 2: Lady Deathwhisper timers
+            -- 2: Lady Susurramuerte timers
             -- 3: Gunship Battle timers
             elseif sourceName == "Kor'kron Battle-Mage" or sourceName == "Skybreaker Sorcerer" then
                 if spellName == "Below Zero" then --69705
                     MPR_Timers:BelowZero()
                 end
-            -- 4: Deathbringer Saurfang timers
-            elseif sourceName == "Deathbringer Saurfang" then
-                if spellName == "Rune of Blood" then --72410
+            -- 4: Libramorte Colmillosauro timers
+            elseif sourceName == "Libramorte Colmillosauro" then
+                if spellName == "Runa sangrienta" then --72410
                     MPR_Timers:RuneOfBlood()
                 end
-            -- 5: Festergut timers
-            -- 6: Rotface timers
-            elseif sourceName == "Rotface" then
-                if spellName == "Slime Spray" then
+            -- 5: Panzachancro timers
+            -- 6: Carapútrea timers
+            elseif sourceName == "Carapútrea" then
+                if spellName == "Pulverizador de babas" then
                     MPR_Timers:SlimeSpray()
-                elseif spellName == "Choking Gas Bomb" then
+                elseif spellName == "Bomba de gas asfixiante" then
                     MPR_Timers:ChokingGasBomb()
                 end
-            -- 7: Professor Putricide timers
-            elseif sourceName == "Professor Putricide" then
-                if spellName == "Tear Gas" then
+            -- 7: Profesor Putricidio timers
+            elseif sourceName == "Profesor Putricidio" then
+                if spellName == "Gas lacrimógeno" then
                     MPR_Timers:TearGas()
-                elseif spellName == "Unstable Experiment" then
+                elseif spellName == "Experimento inestable" then
                     MPR_Timers:UnstableExperiment()
-                elseif spellName == "Choking Gas Bomb" then
+                elseif spellName == "Bomba de gas asfixiante" then
                     MPR_Timers:ChokingGasBomb()
                 end
             -- 8: Blood Prince Council
@@ -855,11 +1104,11 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                 elseif spellName == "Empowered Shock Vortex" then
                     MPR_Timers:EmpoweredShockVortex()
                 end
-            -- 9: Blood-Queen Lana'thel
-            elseif sourceName == "Blood-Queen Lana'thel" then
-                if spellName == "Incite Terror" then
+            -- 9: Reina de Sangre Lana'thel
+            elseif sourceName == "Reina de Sangre Lana'thel" then
+                if spellName == "Incitar terror" then
                     MPR_Timers:InciteTerror()
-                elseif spellName == "Swarming Shadows" then
+                elseif spellName == "Sombras enjambradoras" then
                     MPR_Timers:SwarmingShadows()
                 end
                 
@@ -872,13 +1121,13 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
             ]]
             -- 11: Sindragosa
             elseif sourceName == "Sindragosa" then
-                if spellName == "Icy Grip" then
+                if spellName == "Agarre helado" then
                     MPR_Timers:BlisteringCold()
-                elseif spellName == "Frost Beacon" then
+                elseif spellName == "Señal de Escarcha" then
                     MPR_Timers:FrostBeacon()
                 end
-            -- 12: The Lich King timers
-            elseif sourceName == "The Lich King" then
+            -- 12: El Rey Exánime timers
+            elseif sourceName == "El Rey Exánime" then
                 if spellId == 68981 or spellId == 74270 or spellId == 74271 or spellId == 74272 then -- Remorseless Winter
                     MPR_Timers:RemorselessWinter()
                 elseif spellId == 69200 then -- Raging Spirit
@@ -908,17 +1157,22 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                 elseif spellName == "Intimidating Roar" then
                     MPR_Timers:ZarithrianIntimidatingRoar()
                 end
-            -- 23: Halion timers
+			end
+            --[[ No es SELL_CAST_START sino AURA
+			-- 23: Halion timers
             elseif sourceName == "Halion" then
-                if spellName == "Fiery Combustion" then
+                if spellName == "Combustión ígnea" then
                     MPR_Timers:FieryCombustion()
-                    self:Whisper(destName, GetSpellLink(spellId).." on you! Run to the wall!!")
-                elseif spellName == "Soul Consumption" then
+                    self:Whisper(destName, GetSpellLink(spellId).." en ti!")
+                elseif spellName == "Consumo de alma" then
                     MPR_Timers:SoulConsumption()
-                    self:Whisper(destName, GetSpellLink(spellId).." on you! Run to the wall!!")
+                    self:Whisper(destName, GetSpellLink(spellId).." en ti!")
                 end
             end
-        
+			]]--
+		
+			-- Hero ? pa que
+			--[[
             if spellName == "Heroism" and UnitInRaid(sourceName) then
                 table.wipe(targetsHeroism)
                 casterHeroism = sourceName
@@ -930,15 +1184,17 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
             elseif contains(spellsBossCastOnTarget,spellName) then
                 self:ReportBossCastOnTarget(spellId,destName)
             end
-            
-            if spellName == "Necrotic Plague" then
-                self:Whisper(destName, GetSpellLink(spellId).." on you! Run to a Shambling Horror!!")
-            elseif sourceName == "Shadow Trap" and spellName == "Shadow Trap" then
-                self:RaidReport(GetSpellLink(spellId)) --self:RaidReport("{rt8}{rt8}{rt8} "..GetSpellLink(spellId).." summoned! {rt8}{rt8}{rt8}")
-            elseif spellName == "Swarming Shadows" then
-                self:Whisper(destName, GetSpellLink(spellId).." on you! Run along walls!!")
-            elseif spellId == 74502 then
-                self:Whisper(destName, GetSpellLink(spellId).." on you! Run away!!")
+            ]]--
+			
+            if spellName == "Peste necrótica" then
+                self:Whisper(destName, GetSpellLink(spellId).." on you!")
+            elseif sourceName == "El Rey Exánime" and spellName == "Invocar trampa de las Sombras" then
+                --self:RaidReport(GetSpellLink(spellId))
+				self:HandleReport("{rt8} "..GetSpellLink(spellId).." summoned! {rt8}")
+            elseif spellName == "Sombras enjambradoras" then
+                self:Whisper(destName, GetSpellLink(spellId).." en ti! Corre a la pared!!")
+            elseif spellId == 74502 then -- Doble marca Baltharus
+                self:Whisper(destName, GetSpellLink(spellId).." en ti! Sepárate!!")
             end
         elseif event == "SPELL_CREATE" then
             if contains(spellsCreate,destName,true) then
@@ -949,8 +1205,11 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
         elseif event == "SPELL_SUMMON" then
             if spellId == 69037 or spellId == 71844 then -- Summon Val'kyr
                 MPR_Timers:SummonValkyr(tonumber(string.sub(destGUID,9,12),16).."-"..tonumber(string.sub(destGUID,13),16))
-            elseif sourceName == "Lady Deathwhisper" and spellName == "Summon Spirit" then
+            elseif sourceName == "Lady Susurramuerte" and spellName == "Invocar espíritu" then
                 MPR_Timers:SummonVengefulShade()
+			elseif sourceName == "El Rey Exánime" and spellName == "Profanar" then
+				local target = select(7)
+				self:HandleReport("{rt8} "..GetSpellLink(spellId).." en "..target.."! {rt8}")
             end
             
             if contains(npcsSpellSumon,destName) then
@@ -999,8 +1258,8 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
             if event == "SPELL_PERIODIC_DAMAGE" then
                 local amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing = select(12, ...)
                 
-                if spellName == "Pain and Suffering" and UnitInRaid(destName) then 
-                    local Debuff, _, _, Count = UnitDebuff(destName,"Pain and Suffering")
+                if spellName == "Dolor y sufrimiento" and UnitInRaid(destName) then 
+                    local Debuff, _, _, Count = UnitDebuff(destName,"Dolor y sufrimiento")
                     if Debuff and Count == 5 then
                         self:Whisper(destName, GetSpellLink(spellId).." (5 stacks) on you! Spread!! ("..amount.." damage)")
                     end
@@ -1010,6 +1269,13 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                     self:ReportSpellDamage(spellId,destName,amount,critical)
                 end
                 
+				-- Infestar
+				if spellName == "Infestar" and UnitInRaid(destName) then 
+                    if amount > 8000 then
+						self:HandleReport(string.format("%s tiene %s con %i de daño.", destName, GetSpellLink(spellId), amount))
+                    end
+                end
+				
                 -- for fun!
                 if overkill > 0 and #self.DataDeaths > 0 and destName == self.DataDeaths[#self.DataDeaths].Name and self.Settings["KILLINGBLOW"] then
                     self:RaidReport(self:FormatKillingBlow(sourceName,destName,"a periodic tick of "..GetSpellLink(spellId),amount,overkill,critical))
@@ -1025,7 +1291,7 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
         elseif event == "SPELL_DISPEL" then
             local extraSpellId, extraSpellName, extraSpellSchool, auraType = select(12, ...)
             
-            if extraSpellName == "Necrotic Plague" and sourceName ~= destName then
+            if extraSpellName == "Peste necrótica" and sourceName ~= destName then
                 self:Whisper(destName, GetSpellLink(extraSpellId).." dispeled from you!")
             end
             
@@ -1035,40 +1301,28 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
         elseif event == "SPELL_AURA_APPLIED" then
             local auraType = select(12, ...)
             
-            if spellName == "Gas Spore" then
+            if spellName == "Espora de gas" then
                     MPR_Timers:GasSpore()
-            elseif spellName == "Gastric Bloat" then
+            elseif spellName == "Hinchazón gástrica" then
                     MPR_Timers:GastricBloat()
-            elseif sourceName == "Professor Putricide" then
-                if spellName == "Vile Gas" then
+            elseif sourceName == "Profesor Putricidio" then
+                if spellName == "Gas inmundo" then
                     MPR_Timers:VileGas()
                 end
-            elseif spellName == "Mutated Infection" then
+            elseif spellName == "Infección mutada" then
                 MPR_Timers:MutatedInfection()
-            elseif spellName == "Invocation of Blood" then
+            elseif spellName == "Invocación de sangre" then
                 MPR_Timers:InvocationOfBlood(destName)
                 BPC_ChangeTarget(destName)
             end
             
-            if spellName == "Frost Beacon" then
+            if spellName == "Señal de Escarcha" then
                 MPR_Timers:FrostBeacon()
-                self:Whisper(destName, GetSpellLink(70126).." on you! Run away from others!!")
-            elseif spellName == "Gaseous Bloat" and UnitIsPlayer(destName) then
-                self:Whisper(destName, GetSpellLink(spellId).." on you! Kite it!!")
+                self:Whisper(destName, GetSpellLink(70126).." en ti!")
+            elseif spellName == "Hinchazón gaseosa" and UnitIsPlayer(destName) then
+                self:Whisper(destName, GetSpellLink(spellId).." en ti!")
             elseif spellId == 33786 then
                 self:ReportCastOnTarget(sourceName,destName,spellId)
-            end
-            
-            if sourceName == "Sindragosa" and spellName == "Instability" and UnitInRaid(destName) then 
-                local Debuff, _, _, Count = UnitDebuff(destName,"Instability")
-                if Debuff == "Instability" and Count == 8 then
-                    self:Whisper(destName, GetSpellLink(spellId).." (8 stacks) on you! Stop casting!!")
-                end
-            elseif sourceName == "Sindragosa" and spellName == "Chilled to the Bone" and UnitInRaid(destName) then 
-                local Debuff, _, _, Count = UnitDebuff(destName,"Chilled to the Bone")
-                if Debuff and Count == 10 then
-                    self:Whisper(destName, GetSpellLink(spellId).." (10 stacks) on you! Stop attacking!!")
-                end
             end
             
             if contains(aurasAppliedOnTarget,spellName) and UnitIsPlayer(destName) then
@@ -1091,13 +1345,13 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                 self:ReportAppliedOnTarget(spellId,destName)
             --elseif contains({70952,70982,70981},spellId) then -- BPC: Target Switch
                 --BPC_ChangeTarget(destName)
-            elseif spellName == "Essence of the Blood Queen" and UnitIsPlayer(destName) then
-                --self:Whisper(destName, "Bite on you! (+100% dmg)")
-            elseif spellName == "Frenzied Bloodthirst" and UnitIsPlayer(destName) then
+            elseif spellName == "Esencia de la Reina de Sangre" and UnitIsPlayer(destName) then
+                --self:Whisper(destName, "Bite on you!")
+            elseif spellName == "Sed de sangre frenética" and UnitIsPlayer(destName) then
                 self:Whisper(destName, "You have to bite!!")
-            elseif spellName == "Uncontrollable Frenzy" and UnitIsPlayer(destName) then
+            elseif spellName == "Frenesí incontrolable" and UnitIsPlayer(destName) then
                 --self:Whisper(destName, "You failed to bite.")
-                self:RaidReport(string.format("%s failed to bite.", destName))
+                self:HandleReport(string.format("%s failed to bite.", destName))
             elseif spellName == "Touch of Jaraxxus" then -- Jaraxxus: Touch of Jaraxxus
                 self:Whisper(destName, GetSpellLink(spellId).." on you! Run away till debuff is gone!!")
             elseif spellName == "Incinerate Flesh" then -- Jaraxxus: Incinerate Flesh
@@ -1106,10 +1360,36 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
         elseif event == "SPELL_AURA_APPLIED_DOSE" then
             local auraType, amount = select(12, ...)
             if contains(stackAppliedOnTarget,spellName) then
-                self:ReportStacksOnTarget(destName,spellId,amount)
+				self:ReportStacksOnTarget(destName,spellId,amount)
             end
+			if spellName == "Inestabilidad" then
+				if amount == 4 then
+					self:Whisper(destName, GetSpellLink(spellId).." (4) on you! Stop casting!!")
+				end
+				if amount >= 5 then
+					self:ReportStacksOnTarget(destName,spellId,amount)
+				end
+			end
+			if spellName == "Helado hasta los huesos" then
+				if amount == 10 then
+					self:Whisper(destName, GetSpellLink(spellId).." (10 stacks) on you! Stop attacking!!")
+				end
+				if amount >= 11 then
+					self:ReportStacksOnTarget(destName,spellId,amount)
+				end
+			end
+			
         elseif event == "SPELL_RESURRECT" and spellId == 48477 then -- Rebirth (Druid)
             self:ReportCombatResurrect(sourceName,spellId,destName)
+			
+		-- Recastea moco naranja en 3s.
+		elseif event == "SPELL_AURA_REMOVED_DOSE" and spellName == "Hinchazón gaseosa" then
+			local auraType, amount = select(12, ...)
+			if amount == 2 then
+				self:HandleReport(string.format("Moco naranja recastea en 3s."))
+				--self:ReportStacksOnTarget(destName,spellId,amount)
+			end
+			
         end
     end
 end
@@ -1137,22 +1417,22 @@ function MPR:CHAT_MSG_MONSTER_YELL(Message, Sender)
     end
     
     -- for MPR_Timers
-    if Sender == "Valithria Dreamwalker" and Message == "I have opened a portal into the Emerald Dream. Your salvation lies within, heroes." then
+    if Sender == "Valithria Dreamwalker" and Message == "He abierto un portal al Sueño. Vuestra salvación está dentro, héroes..." then
         MPR_Timers:SummonPortal()
     elseif Sender == "Sindragosa" then
-        if Message == "Your incursion ends here! None shall survive!" then
+        if Message == "¡Aquí termina vuestra incursión! ¡Nadie sobrevivirá!" then
             MPR_Timers:AirPhase()
-        elseif Message == "Now feel my master's limitless power and despair!" then
+        elseif Message == "¡Ahora sentid el poder sin fin de mi maestro y desesperad!" then
             MPR_Timers:SecondPhase()
         end
     elseif Sender == "General Zarithrian" and Message == "Turn them to ash, minions!" then
         MPR_Timers:ZarithrianSummonAdds()
     elseif Sender == "Halion" then
-        if Message == "The heavens burn!" then
+        if Message == "¡Los cielos arden!" then
             MPR_Timers:MeteorStrike()
-        elseif Message == "You will find only suffering within the realm of twilight! Enter if you dare!" then
+        elseif Message == "En el reino del crepúsculo solo encontraréis sufrimiento. ¡Entrad si os atrevéis!" then
             MPR_Timers:PhaseTwo()
-        elseif Message == "Beware the shadow!" then
+        elseif Message == "¡Temed la sombra!" then
             self:ScheduleTimer("Halion:TwilightCutter", TimerHandler, 5)
         end
     end
@@ -1225,7 +1505,7 @@ function MPR:ReportSpellCreate(UNIT,SPELL) -- Unit prepares [Spell].
 end
 
 --[[ SPELL_RESURRECT ]]-- only dudu ress
-function MPR:ReportCombatResurrect(UNIT,SPELL,TARGET) -- Unit prepares [Spell].
+function MPR:ReportCombatResurrect(UNIT,SPELL,TARGET) -- Unit resurrects target [Spell].
     self:HandleReport(string.format("%s resurrects %s (%s)",UNIT,TARGET,spell(SPELL,true)), string.format("%s resurrects %s (%s)",unit(UNIT),unit(TARGET),spell(SPELL)))
 end
 
@@ -1301,7 +1581,7 @@ function MPR:Whisper(TARGET, MESSAGE, ...)
     local wBypass = ...
     if not (MESSAGE and (self.Settings["WHISPER"] or wBypass)) then return end
     if UnitName("player") ~= TARGET then
-        SendChatMessage("<MPR> "..MESSAGE, "WHISPER", nil, TARGET)
+        SendChatMessage(MESSAGE, "WHISPER", nil, TARGET)
     else -- Don't whisper myself, print with :SelfReport()
         self:SelfReport(MESSAGE)
     end
@@ -1318,7 +1598,7 @@ end
 function MPR:Cabezazos(MESSAGE)
     if not (MESSAGE) then return end
     local chan = GetChannelName("cabezazos")
-    SendChatMessage(MESSAGE, "CHANNEL",nil,chan)
+    SendChatMessage(MESSAGE, "CHANNEL", nil, chan)
 end
 
 --[[-------------------------------------------------------------------------

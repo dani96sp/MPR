@@ -11,32 +11,32 @@ MPR_Timers.LichKingWarnings = {
 MPR_Timers.QuakeCount = 0
 MPR_Timers.InfoTimers = {
     [1] = {
-        [1] = {['name'] = "Bone Spike Graveyard",    ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
-        [2] = {['name'] = "Bone Storm",                ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
+        [1] = {['name'] = "Cementerio de púas osarias",    ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
+        [2] = {['name'] = "Tormenta ósea",                ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
     },
     [2] = {
-        [1] = {['name'] = "Summon Adds",            ['format'] = "{Name}: {Time}",            ['label'] = 1},
-        [2] = {['name'] = "Summon Vengeful Shade",    ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
+        [1] = {['name'] = "Nuevos adds",            ['format'] = "{Name}: {Time}",            ['label'] = 1},
+        [2] = {['name'] = "Invocar Sombra vengativa",    ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
     },
     [3] = {
         [1] = {['name'] = "Below Zero",                ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
     },
     [4] = {
-        [1] = {['name'] = "Rune of Blood",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
+        [1] = {['name'] = "Runa sangrienta",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
     },
     [5] = {
-        [1] = {['name'] = "Gas Spore",                ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
-        [2] = {['name'] = "Gastric Bloat",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
+        [1] = {['name'] = "Espora de gas",                ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
+        [2] = {['name'] = "Hinchazón gástrica",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
     },
     [6] = {
-        [1] = {['name'] = "Slime Spray",            ['format'] = "{SpellLink}: {Time}",        ['label'] = 1},
-        [2] = {['name'] = "Mutated Infection",        ['format'] = "{SpellLink}: {Time}",        ['label'] = 2},
-        [3] = {['name'] = "Vile Gas",                ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 3},
+        [1] = {['name'] = "Pulverizador de babas",            ['format'] = "{SpellLink}: {Time}",        ['label'] = 1},
+        [2] = {['name'] = "Infección mutada",        ['format'] = "{SpellLink}: {Time}",        ['label'] = 2},
+        [3] = {['name'] = "Gas inmundo",                ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 3},
     },
     [7] = {
-        [1] = {['name'] = "Unstable Experiment",    ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
-        [2] = {['name'] = "Malleable Goo",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
-        [3] = {['name'] = "Choking Gas Bomb",        ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 3},
+        [1] = {['name'] = "Experimento inestable",    ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
+        [2] = {['name'] = "Moco maleable",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
+        [3] = {['name'] = "Bomba de gas asfixiante",        ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 3},
     },
     [8] = {
         [1] = {['name'] = "Target Switch",            ['format'] = "{Name}: {Time}",            ['label'] = 1},
@@ -44,26 +44,26 @@ MPR_Timers.InfoTimers = {
         [3] = {['name'] = "Shadow Resonance",        ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 3},
     },
     [9] = {
-        [1] = {['name'] = "Incite Terror",            ['format'] = "{SpellLink}: {Time}",        ['label'] = 1},
-        [2] = {['name'] = "Swarming Shadows",        ['format'] = "{SpellLink}: {Time}",        ['label'] = 2},
-        [3] = {['name'] = "Berserk",                ['format'] = "{SpellLink}: {Time}",        ['label'] = 3},
+        [1] = {['name'] = "Incitar terror",            ['format'] = "{SpellLink}: {Time}",        ['label'] = 1},
+        [2] = {['name'] = "Sombras enjambradoras",        ['format'] = "{SpellLink}: {Time}",        ['label'] = 2},
+        [3] = {['name'] = "Rabia",                ['format'] = "{SpellLink}: {Time}",        ['label'] = 3},
     },
     [10] = {
         [1] = {['name'] = "Summon Portal",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
     },
     [11] = {
-        [1] = {['name'] = "Blistering Cold",        ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
-        [2] = {['name'] = "Air Phase",                ['format'] = "{Name}: {Time}",            ['label'] = 2},
-        [3] = {['name'] = "Frost Beacon",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
+        [1] = {['name'] = "Frío virulento",        ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
+        [2] = {['name'] = "Fase aérea",                ['format'] = "{Name}: {Time}",            ['label'] = 2},
+        [3] = {['name'] = "Señal de Escarcha",            ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
     },
     [12] = {
-        [1] = {['name'] = "Summon Shadow Trap",       ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
-        [2] = {['name'] = "Summon Val'kyr",           ['format'] = "{SpellLink}: {Time}",       ['label'] = 1},
-        [3] = {['name'] = "Defile",                   ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
-        [4] = {['name'] = "Harvest Soul/s",           ['format'] = "{SpellLink}: {Time}",       ['label'] = 1},
-        [5] = {['name'] = "Raging Spirit",            ['format'] = "{Name} CD: {Time}",         ['label'] = 1},
+        [1] = {['name'] = "Invocar Trampa de las Sombras",       ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
+        [2] = {['name'] = "Invocar Val'kyr",           ['format'] = "{SpellLink}: {Time}",       ['label'] = 1},
+        [3] = {['name'] = "Profanar",                   ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 2},
+        [4] = {['name'] = "Recolectar alma/s",           ['format'] = "{SpellLink}: {Time}",       ['label'] = 1},
+        [5] = {['name'] = "Espíritu enfurecido",            ['format'] = "{Name} CD: {Time}",         ['label'] = 1},
         [6] = {['name'] = "Quake",                    ['format'] = "{SpellLink}: {Time}",       ['label'] = 2},
-        [7] = {['name'] = "Necrotic Plague",          ['format'] = "{SpellLink}: {Time}",       ['label'] = 1},
+        [7] = {['name'] = "Peste necrótica",          ['format'] = "{SpellLink}: {Time}",       ['label'] = 1},
     },
     [13] = {
         [1] = {['name'] = "Impale",                   ['format'] = "{SpellLink} CD: {Time}",    ['label'] = 1},
@@ -74,8 +74,8 @@ MPR_Timers.InfoTimers = {
         [1] = {['name'] = "Slime Pool",               ['format'] = "{SpellLink}: {Time}",    ['label'] = 1},
     },
     [20] = {
-        [1] = {['name'] = "Enrage",                   ['format'] = "{SpellLink} CD: {Time}", ['label'] = 1},
-        [2] = {['name'] = "Air Phase",                ['format'] = "{Name}: {Time}",         ['label'] = 2},
+        [1] = {['name'] = "Enfurecer",                   ['format'] = "{SpellLink} CD: {Time}", ['label'] = 1},
+        [2] = {['name'] = "Fase aérea",                ['format'] = "{Name}: {Time}",         ['label'] = 2},
     },
     [21] = {
         [1] = {['name'] = "Blade Tempest",            ['format'] = "{SpellLink} 1: {Time}",  ['label'] = 1},
@@ -88,10 +88,10 @@ MPR_Timers.InfoTimers = {
         [3] = {['name'] = "Intimidating Roar",        ['format'] = "{SpellLink}: {Time}",  ['label'] = 3},
     },
     [23] = {
-        [1] = {['name'] = "Meteor Strike",            ['format'] = "{SpellLink}: {Time}",    ['label'] = 1},
-        [2] = {['name'] = "Fiery Combustion",         ['format'] = "{SpellLink}: {Time}",    ['label'] = 2},
-        [3] = {['name'] = "Twilight Cutter",          ['format'] = "{SpellLink}: {Time}",    ['label'] = 1},
-        [4] = {['name'] = "Soul Consumption",         ['format'] = "{SpellLink}: {Time}",    ['label'] = 2},
+        [1] = {['name'] = "Golpe de meteorito",       ['format'] = "{SpellLink}: {Time}",    ['label'] = 1},
+        [2] = {['name'] = "Combustión ígnea",         ['format'] = "{SpellLink}: {Time}",    ['label'] = 2},
+        [3] = {['name'] = "Corte Crepuscular",          ['format'] = "{SpellLink}: {Time}",    ['label'] = 1},
+        [4] = {['name'] = "Consumo de alma",          ['format'] = "{SpellLink}: {Time}",    ['label'] = 2},
     },
 }
 -- structure generated as timers are set
@@ -221,46 +221,46 @@ end
 
 function MPR_Timers:GetSpellID(spellName)
            -- Lord Marrowgar
-    return spellName == "Bone Spike Graveyard"   and 69057 or
-           spellName == "Bone Storm"             and 69076 or
+    return spellName == "Cementerio de púas osarias"   and 69057 or
+           spellName == "Tormenta ósea"             and 69076 or
            -- Lady Deathwhisper
-           spellName == "Summon Vengeful Shade"  and 71426 or
+           spellName == "Invocar Sombra vengativa"  and 71426 or
            -- Gunship Battle
            spellName == "Below Zero"             and 69705 or
            -- Deathbringer Saurfang
-           spellName == "Rune of Blood"          and 72410 or
+           spellName == "Runa sangrienta"          and 72410 or
            -- Festergut
-           spellName == "Gas Spore"              and 69278 or
-           spellName == "Gastric Bloat"          and 72219 or
+           spellName == "Espora de gas"              and 69278 or
+           spellName == "Hinchazón gástrica"          and 72219 or
            -- Rotface
-           spellName == "Slime Spray"            and 69508 or
-           spellName == "Mutated Infection"      and 69674 or
-           spellName == "Vile Gas"               and 69240 or
+           spellName == "Pulverizador de babas"            and 69508 or
+           spellName == "Infección mutada"      and 69674 or
+           spellName == "Gas inmundo"               and 69240 or
            -- Professor Putricide
-           spellName == "Unstable Experiment"    and 70351 or
-           spellName == "Malleable Goo"          and 70852 or
-           spellName == "Choking Gas Bomb"       and 71255 or
+           spellName == "Experimento inestable"    and 70351 or
+           spellName == "Moco maleable"          and 70852 or
+           spellName == "Bomba de gas asfixiante"       and 71255 or
            -- Blood Prince Council
            spellName == "Empowered Shock Vortex" and (self.EmpoweredPrince ~= "Prince Valanar" and 71944 or 72039) or
            spellName == "Shadow Resonance"       and 71943 or
            -- Blood-Queen Lana'thel
-           spellName == "Incite Terror"          and 73070 or
-           spellName == "Swarming Shadows"       and 71264 or
-           spellName == "Berserk"                and 26662 or
+           spellName == "Incitar terror"          and 73070 or
+           spellName == "Sombras enjambradoras"       and 71264 or
+           spellName == "Rabia"                and 26662 or
            -- Valithria Dreamwalker
            spellName == "Summon Portal"          and (self:IsNormal() and 72224 or 72480) or
            -- Sindragosa
-           spellName == "Blistering Cold"        and 70123 or
-           spellName == "Frost Beacon"           and 70126 or
+           spellName == "Frío virulento"        and 70123 or
+           spellName == "Señal de Escarcha"           and 70126 or
            -- The Lich King
-           spellName == "Summon Shadow Trap"     and 73539 or
-           spellName == "Shadow Trap"            and 73529 or
-           spellName == "Harvest Soul/s"         and (self:IsNormal() and 74325 or 74297) or
-           spellName == "Summon Val'kyr"         and 69037 or
-           spellName == "Defile"                 and 72762 or
-           spellName == "Raging Spirit"          and 69200 or
+           spellName == "Invocar Trampa de las Sombras"     and 73539 or
+           spellName == "Trampa de las Sombras"            and 73529 or
+           spellName == "Recolectar alma/s"         and (self:IsNormal() and 74325 or 74297) or
+           spellName == "Invocar Val'kyr"         and 69037 or
+           spellName == "Profanar"                 and 72762 or
+           spellName == "Espíritu enfurecido"          and 69200 or
            spellName == "Quake"                  and 72262 or
-           spellName == "Necrotic Plague"        and self:RaidMode(70337,73912,73913,73914) or
+           spellName == "Peste necrótica"        and self:RaidMode(70337,73912,73913,73914) or
            -- Gormok the Impaler
            spellName == "Impale"                 and 66331 or
            spellName == "Staggering Stomp"       and 67648 or 
@@ -268,17 +268,17 @@ function MPR_Timers:GetSpellID(spellName)
            -- Acidmaw & Dreadscale
            spellName == "Slime Pool"             and 66883 or
            -- Saviana Ragefire
-           spellName == "Enrage"                 and 78722 or
+           spellName == "Enfurecer"                 and 78722 or
            -- Baltharus the Warborn
            spellName == "Blade Tempest"          and 75125 or
            -- General Zarithrian
            spellName == "Cleave Armor"           and 74367 or
            spellName == "Intimidating Roar"      and 74384 or       
            -- Halion
-           spellName == "Meteor Strike"          and self:RaidMode(74648,75877,75878,75879) or
-           spellName == "Fiery Combustion"       and 74562 or
-           spellName == "Twilight Cutter"        and 74769 or 
-           spellName == "Soul Consumption"       and 74792
+           spellName == "Golpe de meteorito"     and self:RaidMode(74648,75877,75878,75879) or
+           spellName == "Combustión ígnea"       and 74562 or
+           spellName == "Corte Crepuscular"        and 74769 or 
+           spellName == "Consumo de alma"        and 74792
 end
 
 function MPR_Timers:RaidMode(Mode10N, Mode25N, Mode10H, Mode25H)
@@ -381,14 +381,14 @@ function MPR_Timers:Update()
     local LKHealthPct = nil
     for i=1,GetNumRaidMembers() do
         local UnitIDTarget = (i > 0 and "raid"..i or "").."target"
-        if UnitName(UnitIDTarget) == "The Lich King" then
+        if UnitName(UnitIDTarget) == "El Rey Exánime" then
             LKHealthPct = round(100*UnitHealth(UnitIDTarget)/UnitHealthMax(UnitIDTarget),0,true)
             break
         end
     end
     if LKHealthPct and LKHealthPct > 40 and self.LichKingWarnings[LKHealthPct] and not self.LichKingWarnings[LKHealthPct][1] then
         self.LichKingWarnings[LKHealthPct][1] = true
-        MPR:RaidReport("Warning: The Lich King has "..LKHealthPct.."% HP remaining! "..(self.LichKingWarnings[LKHealthPct][2] or ""))
+        MPR:HandleReport("Warning: The Lich King has "..LKHealthPct.."% HP remaining! "..(self.LichKingWarnings[LKHealthPct][2] or ""))
     end
     
     if self.QuakeCount == 1 then -- During Phase 2 only
@@ -522,12 +522,12 @@ end
 -- 1: Lord Marrowgar
 function MPR_Timers:BoneSpikeGraveyard()
     --local cd = round(self.DataTimers[1][1],1,true)
-    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Bone Spike Graveyard")),cd,nil) end
+    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Cementerio de púas osarias")),cd,nil) end
     self.DataTimers[1][1] = 15
 end
 function MPR_Timers:BoneStorm()
     --local cd = round(self.DataTimers[1][2],1,true)
-    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Bone Storm")),cd,nil) end
+    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Tormenta ósea")),cd,nil) end
     if self:IsNormal() then  
         self.DataTimers[1][1] = self:Is10Man() and 35 or 45
     end
@@ -572,23 +572,23 @@ end
 -- 5: Festergut
 function MPR_Timers:GasSpore()
     --local cd = round(self.DataTimers[5][1],1,true)
-    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Gas Spore")),cd,nil) end
+    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Espora de gas")),cd,nil) end
     self.DataTimers[5][1] = 40
 end
 function MPR_Timers:GastricBloat()
     --local cd = round(self.DataTimers[5][2],1,true)
-    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Gastric Bloat")),cd,nil) end
+    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Hinchazón gástrica")),cd,nil) end
     self.DataTimers[5][2] = 15
 end
 -- 6: Rotface
 function MPR_Timers:SlimeSpray()
     --local cd = round(self.DataTimers[6][1],1,true)
-    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Slime Spray")),cd,nil) end
+    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Pulverizador de babas")),cd,nil) end
     self.DataTimers[6][1] = 20
 end
 function MPR_Timers:MutatedInfection()
     --local cd = round(self.DataTimers[6][2],1,true)
-    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Mutated Infection")),cd,nil) end
+    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Infección mutada")),cd,nil) end
     self.DataTimers[6][2] = 14
 end
 function MPR_Timers:VileGas()
@@ -609,12 +609,12 @@ function MPR_Timers:UnstableExperiment()
 end
 function MPR_Timers:MalleableGoo()
     --local cd = round(self.DataTimers[7][2],1,true)
-    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Malleable Goo")),cd,nil) end
+    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Moco maleable")),cd,nil) end
     self.DataTimers[7][2] = 25
 end
 function MPR_Timers:ChokingGasBomb()
     --local cd = round(self.DataTimers[7][3],1,true)
-    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Choking Gas Bomb")),cd,nil) end
+    --if cd > 0 then self:NewTimer(GetSpellLink(self:GetSpellID("Bomba de gas asfixiante")),cd,nil) end
     self.DataTimers[7][3] = 35
 end
 -- 8: Blood Prince Council
@@ -894,21 +894,21 @@ function MPR_Timers_Options:Initialize()
     
     --[[ Lord Marrowgar ]]--
     self:NewFS("Lord Marrowgar","00CCFF",10,-30,10)
-    self:NewFS("{Bone Spike Graveyard}:","FFFFFF",14,-42,9)
+    self:NewFS("{Cementerio de púas osarias}:","FFFFFF",14,-42,9)
     self:NewCB("5s", "FFFFFF", 144, -38, "1:1:5")
     self:NewCB("3s", "FFFFFF", 176, -38, "1:1:3")
-    self:NewFS("{Bone Storm}:","FFFFFF",14,-54,9)
+    self:NewFS("{Tormenta ósea}:","FFFFFF",14,-54,9)
     self:NewCB("10s", "FFFFFF", 107, -50, "1:2:10")
     self:NewCB("5s", "FFFFFF", 144, -50, "1:2:5")
     self:NewCB("5s", "FFFFFF", 176, -50, "1:2:5")
     
     --[[ Lady Deathwhisper ]]--
     self:NewFS("Lady Deathwhisper","00CCFF",10,-68,10)
-    self:NewFS("Summon Adds:","FFFFFF",14,-80,9)
+    self:NewFS("Nuevos adds:","FFFFFF",14,-80,9)
     self:NewCB("10s", "FFFFFF", 107, -76, "2:1:10")
     self:NewCB("5s", "FFFFFF", 144, -76, "2:1:5")
     self:NewCB("3s", "FFFFFF", 176, -76, "2:1:3")
-    self:NewFS("{Summon Vengeful Shade}:","FFFFFF",14,-92,9)
+    self:NewFS("{Invocar Sombra vengativa}:","FFFFFF",14,-92,9)
     self:NewCB("10s", "FFFFFF", 107, -88, "2:2:10")
     self:NewCB("5s", "FFFFFF", 144, -88, "2:2:5")
     self:NewCB("3s", "FFFFFF", 176, -88, "2:2:3")
@@ -922,32 +922,32 @@ function MPR_Timers_Options:Initialize()
     
     --[[ Deathbringer Saurfang ]]--
     self:NewFS("Deathbringer Saurfang","00CCFF",10,-136,10)
-    self:NewFS("{Rune of Blood}:","FFFFFF",14,-148,9)
+    self:NewFS("{Runa sangrienta}:","FFFFFF",14,-148,9)
     self:NewCB("10s", "FFFFFF", 107, -144, "4:1:10")
     self:NewCB("5s", "FFFFFF", 144, -144, "4:1:5")
     self:NewCB("3s", "FFFFFF", 176, -144, "4:1:3")
     
     --[[ Festergut ]]--
     self:NewFS("Festergut","00CCFF",10,-166,10)
-    self:NewFS("{Gas Spore}:","FFFFFF",14,-178,9)
+    self:NewFS("{Espora de gas}:","FFFFFF",14,-178,9)
     self:NewCB("10s", "FFFFFF", 107, -174, "5:1:10")
     self:NewCB("5s", "FFFFFF", 144, -174, "5:1:5")
     self:NewCB("3s", "FFFFFF", 176, -174, "5:1:3")
-    self:NewFS("{Gastric Bloat}:","FFFFFF",14,-190,9)
+    self:NewFS("{Hinchazón gástrica}:","FFFFFF",14,-190,9)
     self:NewCB("10s", "FFFFFF", 107, -186, "5:2:10")
     self:NewCB("5s", "FFFFFF", 144, -186, "5:2:5")
     self:NewCB("3s", "FFFFFF", 176, -186, "5:2:3")
     
     --[[ Rotface ]]--
     self:NewFS("Rotface","00CCFF",10,-206,10)
-    self:NewFS("{Slime Spray}:","FFFFFF",14,-218,9)
+    self:NewFS("{Pulverizador de babas}:","FFFFFF",14,-218,9)
     self:NewCB("10s", "FFFFFF", 107, -214, "6:1:10")
     self:NewCB("5s", "FFFFFF", 144, -214, "6:1:5")
     self:NewCB("3s", "FFFFFF", 176, -214, "6:1:3")
-    self:NewFS("{Mutated Infection}:","FFFFFF",14,-230,9)
+    self:NewFS("{Infección mutada}:","FFFFFF",14,-230,9)
     self:NewCB("5s", "FFFFFF", 144, -226, "6:2:5")
     self:NewCB("3s", "FFFFFF", 176, -226, "6:2:3")
-    self:NewFS("{Vile Gas}:","FFFFFF",14,-242,9)
+    self:NewFS("{Gas inmundo}:","FFFFFF",14,-242,9)
     self:NewCB("10s", "FFFFFF", 107, -238, "6:2:10")
     self:NewCB("5s", "FFFFFF", 144, -238, "6:2:5")
     self:NewCB("3s", "FFFFFF", 176, -238, "6:2:3")
@@ -957,11 +957,11 @@ function MPR_Timers_Options:Initialize()
     self:NewFS("{Unstable Experiment}:","FFFFFF",14,-270,9)
     self:NewCB("10s", "FFFFFF", 144, -266, "7:1:10:7")
     self:NewCB("5s", "FFFFFF", 176, -266, "7:1:5:7")
-    self:NewFS("{Malleable Goo}:","FFFFFF",14,-282,9)
+    self:NewFS("{Moco maleable}:","FFFFFF",14,-282,9)
     self:NewCB("10s", "FFFFFF", 107, -278, "7:2:10:8")
     self:NewCB("5s", "FFFFFF", 144, -278, "7:2:5:8")
     self:NewCB("3s", "FFFFFF", 176, -278, "7:2:3:8")
-    self:NewFS("{Choking Gas Bomb}:","FFFFFF",14,-294,9)
+    self:NewFS("{Bomba de gas asfixiante}:","FFFFFF",14,-294,9)
     self:NewCB("10s", "FFFFFF", 119, -290, "7:2:10:2")
     self:NewCB("5s", "FFFFFF", 153, -290, "7:2:5:2")
     self:NewCB("3s", "FFFFFF", 182, -290, "7:2:3:2")
@@ -978,15 +978,15 @@ function MPR_Timers_Options:Initialize()
     
     --[[ Blood Queen Lana'thel ]]--
     self:NewFS("Blood Queen Lana'thel","00CCFF",210,-82,10)
-    self:NewFS("{Incite Terror}:","FFFFFF",214,-94,9)
+    self:NewFS("{Incitar terror}:","FFFFFF",214,-94,9)
     self:NewCB("20s", "FFFFFF", 300, -90, "9:1:20:3")
     self:NewCB("10s", "FFFFFF", 338, -90, "9:1:10:3")
     self:NewCB("5s", "FFFFFF", 376, -90, "9:1:5:3")
-    self:NewFS("{Swarming Shadows}:","FFFFFF",214,-106,9)
+    self:NewFS("{Sombras enjambradoras}:","FFFFFF",214,-106,9)
     self:NewCB("10s", "FFFFFF", 318, -102, "9:2:10:7")
     self:NewCB("5s", "FFFFFF", 352, -102, "9:2:5:7")
     self:NewCB("3s", "FFFFFF", 380, -102, "9:2:3:7")
-    self:NewFS("{Berserk}:","FFFFFF",214,-118,9)
+    self:NewFS("{Rabia}:","FFFFFF",214,-118,9)
     self:NewCB("30s", "FFFFFF", 300, -114, "9:3:10:8")
     self:NewCB("20s", "FFFFFF", 338, -114, "9:3:5:8")
     self:NewCB("10s", "FFFFFF", 376, -114, "9:3:3:8")
@@ -999,39 +999,39 @@ function MPR_Timers_Options:Initialize()
     
     --[[ Sindragosa ]]--
     self:NewFS("Sindragosa","00CCFF",210,-162,10)
-    self:NewFS("{Blistering Cold}:","FFFFFF",214,-174,9)
+    self:NewFS("{Frío virulento}:","FFFFFF",214,-174,9)
     self:NewCB("10s", "FFFFFF", 306, -170, "11:1:10:8")
     self:NewCB("5s", "FFFFFF", 344, -170, "11:1:5:8")
     self:NewCB("3s", "FFFFFF", 376, -170, "11:1:3:8")
-    self:NewFS("Air Phase:","FFFFFF",214,-186,9)
+    self:NewFS("Fase aérea:","FFFFFF",214,-186,9)
     self:NewCB("10s", "FFFFFF", 306, -182, "11:2:10:6")
     self:NewCB("5s", "FFFFFF", 344, -182, "11:2:5:6")
     self:NewCB("3s", "FFFFFF", 376, -182, "11:2:3:6")
-    self:NewFS("{Frost Beacon}:","FFFFFF",214,-198,9)
+    self:NewFS("{Señal de Escarcha}:","FFFFFF",214,-198,9)
     self:NewCB("10s", "FFFFFF", 306, -194, "11:3:10:7")
     self:NewCB("5s", "FFFFFF", 344, -194, "11:3:5:7")
     self:NewCB("3s", "FFFFFF", 376, -194, "11:3:3:7")
 
     --[[ The Lich King ]]--
     self:NewFS("The Lich King","00CCFF",210,-214,10)
-    self:NewFS("{Shadow Trap}:","FFFFFF",214,-226,9)
+    self:NewFS("{Trampa de las Sombras}:","FFFFFF",214,-226,9)
     self:NewCB("5s", "FFFFFF", 290, -222, "12:1:5:8")
     self:NewCB("3s", "FFFFFF", 319, -222, "12:1:3:8")
     self:NewCB("2s", "FFFFFF", 349, -222, "12:1:2:8")
     self:NewCB("1s", "FFFFFF", 379, -222, "12:1:1:8")
-    self:NewFS("{Summon Val'kyr}:","FFFFFF",214,-238,9)
+    self:NewFS("{Invocar Val'kyr}:","FFFFFF",214,-238,9)
     self:NewCB("10s", "FFFFFF", 308, -234, "12:2:10:4")
     self:NewCB("5s", "FFFFFF", 345, -234, "12:2:5:4")
     self:NewCB("3s", "FFFFFF", 376, -234, "12:2:3:4")
-    self:NewFS("{Defile}:","FFFFFF",214,-250,9)
+    self:NewFS("{Profanar}:","FFFFFF",214,-250,9)
     self:NewCB("10s", "FFFFFF", 306, -246, "12:2:10:7")
     self:NewCB("5s", "FFFFFF", 344, -246, "12:2:5:7")
     self:NewCB("3s", "FFFFFF", 376, -246, "12:2:3:7")
-    self:NewFS("{Harvest Soul/s}:","FFFFFF",214,-262,9)
+    self:NewFS("{Recolectar alma/s}:","FFFFFF",214,-262,9)
     self:NewCB("10s", "FFFFFF", 306, -258, "12:2:10:6")
     self:NewCB("5s", "FFFFFF", 344, -258, "12:2:5:6")
     self:NewCB("3s", "FFFFFF", 376, -258, "12:2:3:6")
-    self:NewFS("{Raging Spirit}:","FFFFFF",214,-274,9)
+    self:NewFS("{Espíritu enfurecido}:","FFFFFF",214,-274,9)
     self:NewCB("10s", "FFFFFF", 306, -270, "12:2:10:4")
     self:NewCB("5s", "FFFFFF", 344, -270, "12:2:5:4")
     self:NewCB("3s", "FFFFFF", 376, -270, "12:2:3:4")
@@ -1039,7 +1039,7 @@ function MPR_Timers_Options:Initialize()
     self:NewCB("10s", "FFFFFF", 306, -282, "12:6:10:3")
     self:NewCB("5s", "FFFFFF", 344, -282, "12:6:5:3")
     self:NewCB("3s", "FFFFFF", 376, -282, "12:6:3:3")
-    self:NewFS("{Necrotic Plague}:","FFFFFF",214,-298,9)
+    self:NewFS("{Peste necrótica}:","FFFFFF",214,-298,9)
     self:NewCB("10s", "FFFFFF", 306, -294, "12:7:10:4")
     self:NewCB("5s", "FFFFFF", 344, -294, "12:7:5:4")
     self:NewCB("3s", "FFFFFF", 376, -294, "12:7:3:4")
@@ -1066,36 +1066,36 @@ function MPR_Timers_Options:Initialize()
     
     --[[ Saviana Ragefire ]]--
     self:NewFS("Saviana Ragefire","FF9912",410,-110,10)
-    self:NewFS("{Enrage}:","FFFFFF",414,-122,9)
+    self:NewFS("{Enfurecer}:","FFFFFF",414,-122,9)
     self:NewCB("10s", "FFFFFF", 520, -118, "20:1:10")
     self:NewCB("5s", "FFFFFF", 560, -118, "20:1:5")
-    self:NewFS("Air Phase:","FFFFFF",414,-134,9)
+    self:NewFS("Fase aérea:","FFFFFF",414,-134,9)
     self:NewCB("10s", "FFFFFF", 520, -130, "20:2:10")
     self:NewCB("5s", "FFFFFF", 560, -130, "20:2:5")
     
     --[[ General Ragefire ]]--
     self:NewFS("Saviana Ragefire","FF9912",410,-110,10)
-    self:NewFS("{Enrage}:","FFFFFF",414,-122,9)
+    self:NewFS("{Enfurecer}:","FFFFFF",414,-122,9)
     self:NewCB("10s", "FFFFFF", 520, -118, "20:1:10")
     self:NewCB("5s", "FFFFFF", 560, -118, "20:1:5")
-    self:NewFS("Air Phase:","FFFFFF",414,-134,9)
+    self:NewFS("Fase aérea:","FFFFFF",414,-134,9)
     self:NewCB("10s", "FFFFFF", 520, -130, "20:2:10")
     self:NewCB("5s", "FFFFFF", 560, -130, "20:2:5")
     
     --[[ Halion ]]--
     self:NewFS("Halion","FF9912",410,-150,10)
-    self:NewFS("{Meteor Strike}:","FFFFFF",414,-162,9)
+    self:NewFS("{Golpe de meteorito}:","FFFFFF",414,-162,9)
     self:NewCB("10s", "FFFFFF", 496, -158, "23:1:10:2")
     self:NewCB("5s", "FFFFFF", 532, -158, "23:1:5:2")
     self:NewCB("3s", "FFFFFF", 560, -158, "23:1:3:2")
-    self:NewFS("{Fiery Combustion}:","FFFFFF",414,-174,9)
+    self:NewFS("{Combustión ígnea}:","FFFFFF",414,-174,9)
     self:NewCB("5s", "FFFFFF", 530, -170, "23:2:5:2")
     self:NewCB("3s", "FFFFFF", 560, -170, "23:2:3:2")
-    self:NewFS("{Twilight Cutter}:","FFFFFF",414,-186,9)
+    self:NewFS("{Corte Crepuscular}:","FFFFFF",414,-186,9)
     self:NewCB("10s", "FFFFFF", 498, -182, "23:1:10:3")
     self:NewCB("5s", "FFFFFF", 532, -182, "23:1:5:3")
     self:NewCB("3s", "FFFFFF", 560, -182, "23:1:3:3")
-    self:NewFS("{Soul Consumption}:","FFFFFF",414,-198,9)
+    self:NewFS("{Consumo de alma}:","FFFFFF",414,-198,9)
     self:NewCB("5s", "FFFFFF", 530, -194, "23:1:5:3")
     self:NewCB("3s", "FFFFFF", 560, -194, "23:1:3:3")
 end

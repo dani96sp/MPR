@@ -460,7 +460,7 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         local array = {}
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
-            if UnitDebuff(Unit,"Impaled") then
+            if UnitDebuff(Unit,"Empalado") then
                 local Health = round(UnitHealth(Unit) * 100 / UnitHealthMax(Unit),0,true)
                 table.insert(array,string.format("%s (%s%%)",self:UnitRaid(Unit),Health))
             end
@@ -470,7 +470,7 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         local array = {}
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
-            local Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Dominate Mind")
+            local Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Dominar mente")
             if Debuff then
                 local Health = round(UnitHealth(Unit) * 100 / UnitHealthMax(Unit),0,true)
                 local Expiration = round(ExpirationTime-GetTime(),0,true)
@@ -545,7 +545,7 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         local array = {}
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
-            local Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Rune of Blood")
+            local Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Runa sangrienta")
             if Debuff then
                 local Expiration = round(ExpirationTime-GetTime(),0,true)
                 table.insert(array,string.format("%s (%ss)",self:UnitRaid(Unit),Expiration))
@@ -558,11 +558,11 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
             if UnitIsConnected(Unit) and not UnitIsDeadOrGhost(Unit) and UnitAffectingCombat(Unit) then
-                local Count = select(4,UnitDebuff(Unit,"Gastric Bloat")) or 0
+                local Count = select(4,UnitDebuff(Unit,"Hinchazón gástrica")) or 0
                 if Count > 0 then
                     table.insert(array1,string.format("%s (%s)",self:UnitRaid(Unit),Count))
                 end
-                local Count = select(4,UnitDebuff(Unit,"Inoculated")) or 0
+                local Count = select(4,UnitDebuff(Unit,"Inoculado")) or 0
                 if Count < 3 then
                     table.insert(array2,string.format("%s (%s)",self:UnitRaid(Unit),Count))
                 end
@@ -574,7 +574,7 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         local array = {}
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
-            local Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Mutated Infection")
+            local Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Infección mutada")
             if Debuff then
                 local Expiration = round(ExpirationTime-GetTime(),0,true)
                 table.insert(array,string.format("%s (%ss)",self:UnitRaid(Unit),Expiration))
@@ -588,22 +588,22 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         local array4 = {}
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
-            Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Malleable Goo")
+            Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Moco maleable")
             if Debuff then
                 local Expiration = round(ExpirationTime-GetTime(),0,true)
                 table.insert(array1,string.format("%s (%ss)",self:UnitRaid(Unit),Expiration))
             end
-            Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Choking Gas Explosion")
+            Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Explosión de gas asfixiante")
             if Debuff then
                 local Expiration = round(ExpirationTime-GetTime(),0,true)
                 table.insert(array2,string.format("%s (%ss)",self:UnitRaid(Unit),Expiration))
             end
-            Debuff, _, _, Count, _, _, ExpirationTime = UnitDebuff(Unit,"Mutated Plague")
+            Debuff, _, _, Count, _, _, ExpirationTime = UnitDebuff(Unit,"Peste mutada")
             if Debuff then
                 local Expiration = round(ExpirationTime-GetTime(),0,true)
                 table.insert(array3,string.format("%s (%s)(%ss)",self:UnitRaid(Unit),Count,Expiration))
             end
-            Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Unbound Plague")
+            Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Peste desatada")
             if Debuff then
                 local Expiration = round(ExpirationTime-GetTime(),0,true)
                 table.insert(array4,string.format("%s (%ss)",self:UnitRaid(Unit),Expiration))
@@ -640,17 +640,17 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
             local Debuff, ExpirationTime
-            Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Essence of the Blood Queen")
+            Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Esencia de la Reina de Sangre")
             if Debuff then
                 local Expiration = round(ExpirationTime-GetTime(),0,true)
                 table.insert(array1,string.format("%s (%ss)",self:UnitRaid(Unit),Expiration))
             else
-                Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Frenzied Bloodthirst")
+                Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Sed de sangre frenética")
                 if Debuff then
                     local Expiration = round(ExpirationTime-GetTime(),0,true)
                     table.insert(array2,string.format("%s (%ss)",self:UnitRaid(Unit),Expiration))
                 else
-                    Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Uncontrollable Frenzy")
+                    Debuff, _, _, _, _, _, ExpirationTime = UnitDebuff(Unit,"Frenesí incontrolable")
                     if Debuff then
                         --local Expiration = round(ExpirationTime-GetTime(),0,true)
                         local Health = round(UnitHealth(Unit) * 100 / UnitHealthMax(Unit),0,true)
@@ -861,7 +861,7 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         local array = {}
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
-            local Debuff, _, _, Count, _, _, ExpiraitonTime = UnitDebuff(Unit,"Cleave Armor")
+            local Debuff, _, _, Count, _, _, ExpiraitonTime = UnitDebuff(Unit,"Rajar armadura")
             if Debuff then
                 local Expiration = round(ExpiraitonTime-GetTime(),0,true)
                 table.insert(array,string.format("%s (%s)(%ss)",self:UnitRaid(Unit),Count,Expiration))
@@ -872,16 +872,16 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         local array = {}
         for i=1,GetNumRaidMembers() do
             local Unit = UnitName("raid"..i)
-            local Debuff, _, _, _, _, _, ExpiraitonTime = UnitDebuff(Unit,"Fiery Combustion")
+            local Debuff, _, _, _, _, _, ExpiraitonTime = UnitDebuff(Unit,"Combustión ígnea")
             if Debuff then
                 local Expiration = round(ExpiraitonTime-GetTime(),0,true)
-                local Count = select(4,UnitDebuff(Unit,"Mark of Combustion"))
+                local Count = select(4,UnitDebuff(Unit,"Marca de combustión"))
                 table.insert(array,string.format("%s (%ss)(%s)",self:UnitRaid(Unit),Expiration,Count or 0))
             end
-            local Debuff, _, _, _, _, _, ExpiraitonTime = UnitDebuff(Unit,"Soul Consuption")
+            local Debuff, _, _, _, _, _, ExpiraitonTime = UnitDebuff(Unit,"Consumo de alma")
             if Debuff then
                 local Expiration = round(ExpiraitonTime-GetTime(),0,true)
-                local Count = select(4,UnitDebuff(Unit,"Mark of Consuption"))
+                local Count = select(4,UnitDebuff(Unit,"Marca de consumo"))
                 table.insert(array,string.format("%s (%ss)(%s)",self:UnitRaid(Unit),Expiration,Count or 0))
             end
         end
@@ -889,7 +889,7 @@ function MPR_AuraInfo:UpdateFrameData(diff)
         
         local UnitID, Message = self:GetBossID("Halion")
         if UnitID then
-            local Debuff, _, _, SpellID = self:GetBuffInfo(UnitID,"Corporeality")
+            local Debuff, _, _, SpellID = self:GetBuffInfo(UnitID,"Corporalidad")
             if Debuff then
                 local Color, Percentage, DamageTaken, DamageDealt, DamageTaken2, DamageDealt2 = Halion_CorporealityInfo(SpellID)
                 Name2:SetText(GetSpellLink(74826).." (Phase 3): |cFF"..Color..Percentage.."%|r")
