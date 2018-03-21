@@ -921,7 +921,7 @@ function MPR_Timers_Options:Initialize()
     self:NewCB("3s", "FFFFFF", 176, -116, "3:1:3")
     
     --[[ Deathbringer Saurfang ]]--
-    self:NewFS("Deathbringer Saurfang","00CCFF",10,-136,10)
+    self:NewFS("Libramorte Colmillosaurio","00CCFF",10,-136,10)
     self:NewFS("{Runa sangrienta}:","FFFFFF",14,-148,9)
     self:NewCB("10s", "FFFFFF", 107, -144, "4:1:10")
     self:NewCB("5s", "FFFFFF", 144, -144, "4:1:5")
@@ -954,7 +954,7 @@ function MPR_Timers_Options:Initialize()
     
     --[[ Professor Putricide ]]--
     self:NewFS("Professor Putricide","00CCFF",10,-258,10)
-    self:NewFS("{Unstable Experiment}:","FFFFFF",14,-270,9)
+    self:NewFS("{Experimento inestable}:","FFFFFF",14,-270,9)
     self:NewCB("10s", "FFFFFF", 144, -266, "7:1:10:7")
     self:NewCB("5s", "FFFFFF", 176, -266, "7:1:5:7")
     self:NewFS("{Moco maleable}:","FFFFFF",14,-282,9)

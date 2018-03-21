@@ -10,7 +10,7 @@ MPR.BossData = {
     [0] = {["ENCOUNTER"] = "N/a", ["MSG_START"] = nil, ["MSG_FINISH"] = nil},
     [1] = {
         ["ENCOUNTER"] = "Lord Tuétano",
-        ["MSG_START"] = "The Scourge will wash over this world as a swarm of death and destruction!",
+        ["MSG_START"] = "¡La plaga invadirá este mundo como un enjambre de muerte y destrucción!",
         ["MSG_FINISH"] = "Solo veo... oscuridad.",
         ["BERSERK"] = 600,
     },
@@ -121,7 +121,7 @@ MPR.BossData = {
     -- Ruby Sanctum
     [20] = {
         ["ENCOUNTER"] = "Saviana Ragefire",
-        ["MSG_START"] = "You will sssuffer for this intrusion!",
+        ["MSG_START"] = "¡Sufriréis por esta intrusión!",
         ["MSG_FINISH"] = nil,
     },
     [21] = {
@@ -256,15 +256,17 @@ local npcsBossSpellSumon = {"Sombra vengativa"} -- Boss summons, destination is 
 --| Output: Unit casts [Spell]. |--
 local spellsCast = {"Remorseless Winter", "Quake", "Dark Vortex", "Light Vortex", "Blessing of Forgotten Kings", "Drums of the Wild"}
 --| Output: Unit casts [Spell] on Target. |--
-local spellsCastOnTarget = {"Estimular", "Renacer", "Mano de sacrificio", "Supresión de dolor", "Ángel guardián"}
+local spellsCastOnTarget = {"Estimular", "Renacer", "Mano de sacrificio", "Supresión de dolor", "Ángel guardián", "Imposición de manos"}
 --| Output: [Spell] on Target. |--
 local spellsBossCastOnTarget = {"Runa sangrienta", "Gas inmundo", "Sombras enjambradoras", "Peste Necrótica", "Segador de Almas"} -- If sourceName isn't important (ex. Boss casting).
 
 -- Auras (SPELL_AURA_APPLIED, SPELL_AURA_APPLIED_DOSE, SPELL_AURA_STOLEN) --
 --| Output: [Spell] applied on Target. |--
 --| Filter: UnitIsPlayer(Target)
-local aurasAppliedOnTarget = {"Moco adhesivo volátil", "Hinchazón gaseosa", "Consumo de alma", "Combustión ígnea", "Reencarnación", "Defensor candente"}
--- "Piel de corteza", "Instintos de supervivencia", "Égida de Dalaran", "Defensa iracunda",
+local aurasAppliedOnTarget = {"Moco adhesivo volátil", "Hinchazón gaseosa", "Consumo de alma", "Combustión ígnea"}
+
+local aurasAppliedOnTargetCDS = {"Reencarnación", "Defensor candente", "Instintos de supervivencia", "Divine Protection", "Ice Block", "Dispersion", "Muro de escudos", "Escudo divino", "Entereza ligada al hielo", "Himno divino", "Himno de esperanza", "Tótem Marea de maná", "Ojos crepusculares", "Maestría en auras"}
+-- "Piel de corteza", "Égida de Dalaran", "Defensa iracunda",
 
 --| Output: [Spell] applied on Target1, Target2, Target3 ... |--
 local aurasAppliedOnTargets = {"Empalado", "Espora de gas", "Vile Gas", "Señal de Escarcha"} 
@@ -1075,6 +1077,7 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
             elseif sourceName == "Libramorte Colmillosauro" then
                 if spellName == "Runa sangrienta" then --72410
                     MPR_Timers:RuneOfBlood()
+					self:HandleReport("Timer runa sangrienta")
                 end
             -- 5: Panzachancro timers
             -- 6: Carapútrea timers
@@ -1170,21 +1173,23 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                 end
             end
 			]]--
-		
+			
 			-- Hero ? pa que
 			--[[
             if spellName == "Heroism" and UnitInRaid(sourceName) then
                 table.wipe(targetsHeroism)
                 casterHeroism = sourceName
                 self:ScheduleTimer("Heroism", TimerHandler, 1, spellId)
-            elseif contains(spellsCast,spellName) or spellId == 69381 then -- 69381 - [Gift of the Wild] Drums!
+            ]]--
+			-- 69381 - [Gift of the Wild] Drums!
+			if contains(spellsCast,spellName) then
                 self:ReportCast(sourceName,spellId)
             elseif contains(spellsCastOnTarget,spellName) then
                 self:ReportCastOnTarget(sourceName,destName,spellId)
             elseif contains(spellsBossCastOnTarget,spellName) then
                 self:ReportBossCastOnTarget(spellId,destName)
             end
-            ]]--
+            
 			
             if spellName == "Peste necrótica" then
                 self:Whisper(destName, GetSpellLink(spellId).." on you!")
@@ -1295,7 +1300,7 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                 self:Whisper(destName, GetSpellLink(extraSpellId).." dispeled from you!")
             end
             
-            if self.Settings["REPORT_DISPELS"] and (spellName ~= "Mass Dispel" or self.Settings["REPORT_MASSDISPELS"]) then
+            if self.Settings["REPORT_DISPELS"] and (spellName ~= "Disipación en masa" or self.Settings["REPORT_MASSDISPELS"]) then
                 self:ReportDispel(sourceName,destName,extraSpellId)
             end
         elseif event == "SPELL_AURA_APPLIED" then
@@ -1325,6 +1330,15 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                 self:ReportCastOnTarget(sourceName,destName,spellId)
             end
             
+			-- 23: Halion timers AURA
+			if spellName == "Combustión ígnea" then
+				MPR_Timers:FieryCombustion()
+				self:Whisper(destName, GetSpellLink(spellId).." en ti!")
+			elseif spellName == "Consumo de alma" then
+				MPR_Timers:SoulConsumption()
+				self:Whisper(destName, GetSpellLink(spellId).." en ti!")
+			end
+			
             if contains(aurasAppliedOnTarget,spellName) and UnitIsPlayer(destName) then
                 if destName == UnitName("player") and contains(sayAuraOnMe,spellName) then
                     self:Say(sayAuraOnMe[spellName])
