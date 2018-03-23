@@ -394,7 +394,7 @@ function MPR_Timers:Update()
     if self.QuakeCount == 1 then -- During Phase 2 only
         for i=0,GetNumRaidMembers() do
             local UnitID = i == 0 and "player" or "raid"..i
-            
+            local _, _, group = GetRaidRosterInfo(UnitID)
             -- Check if grabbed
             if UnitInVehicle(UnitID) then
                 if not self.GrabbedPlayers[UnitName(UnitID)] then -- Insert grabbed player
@@ -402,6 +402,9 @@ function MPR_Timers:Update()
                     self.GrabbedPlayers[UnitName(UnitID)] = {} -- {UnitName => TargetMarker}
                     self.GrabbedPlayers[UnitName(UnitID)].Name = string.format("|cFF%s%s|r",ClassColors[strupper(select(2,UnitClass(UnitID)))],UnitName(UnitID))
                     self.GrabbedPlayers[UnitName(UnitID)].Icon = GetRaidTargetIndex(UnitID)
+					if group == 5 then
+						MPR:HandleReport(UnitName(UnitID).." HEAL EN VALKYR")
+					end
                 elseif GetRaidTargetIndex(UnitID) then -- Update grabbed player's icon if we don't have it yet
                     self.GrabbedPlayers[UnitName(UnitID)].Icon = GetRaidTargetIndex(UnitID)
                 end

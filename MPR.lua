@@ -242,7 +242,7 @@ local spellsHeal = {"Runa sangrienta"}
 local spellsPeriodicHeal = {}
 --| Output: [Spell] hits: Target1 (Amount3), Target2 (Amount3), Target3 (Amount3), ... |--
 --| Filter: UnitIsPlayer(Target)
-local spellsAOEDamage = {"Martirio oscuro", "Cuchilla de las Sombras", "Explosión de escalofrío mortal", "Explosión vengativa", "Erupción de mocos", "Moco maleable", "Explosión de gas asfixiante", "Bomba de Escarcha", "Frío virulento", "Profanar", "Trampa de las sombras", "Trample", "Machaque de cola","Contragolpe"}
+local spellsAOEDamage = {"Martirio oscuro", "Cuchilla de las Sombras", "Explosión de escalofrío mortal", "Explosión vengativa", "Erupción de mocos", "Moco maleable", "Explosión de gas asfixiante", "Bomba de Escarcha", "Frío virulento", "Profanar", "Trampa de las sombras", "Trample", "Machaque de cola", "Contragolpe"}
 --| Output: Player damages Target with [Spell]. |--
 local reportDamageOnTarget = {}
 
@@ -254,18 +254,19 @@ local npcsBossSpellSumon = {"Sombra vengativa"} -- Boss summons, destination is 
 
 -- Casts (SPELL_CAST_START and SPELL_CAST_SUCCESS) --
 --| Output: Unit casts [Spell]. |--
-local spellsCast = {"Remorseless Winter", "Quake", "Dark Vortex", "Light Vortex", "Blessing of Forgotten Kings", "Drums of the Wild"}
+--"Remorseless Winter", "Quake", "Dark Vortex", "Light Vortex", "Blessing of Forgotten Kings"
+local spellsCast = {"Drums of the Wild", "Himno divino", "Himno de esperanza", "Tótem Marea de maná", "Ojos crepusculares", "Maestría en auras", "Reencarnación", "Instintos de supervivencia", "Bloque de hielo", "Dispersion", "Muro de escudos", "Escudo divino", "Entereza ligada al hielo"}
 --| Output: Unit casts [Spell] on Target. |--
 local spellsCastOnTarget = {"Estimular", "Renacer", "Mano de sacrificio", "Supresión de dolor", "Ángel guardián", "Imposición de manos"}
 --| Output: [Spell] on Target. |--
-local spellsBossCastOnTarget = {"Runa sangrienta", "Gas inmundo", "Sombras enjambradoras", "Peste Necrótica", "Segador de Almas"} -- If sourceName isn't important (ex. Boss casting).
+local spellsBossCastOnTarget = {"Runa sangrienta", "Gas inmundo", "Sombras enjambradoras", "Peste Necrótica"} -- If sourceName isn't important (ex. Boss casting).
 
 -- Auras (SPELL_AURA_APPLIED, SPELL_AURA_APPLIED_DOSE, SPELL_AURA_STOLEN) --
 --| Output: [Spell] applied on Target. |--
 --| Filter: UnitIsPlayer(Target)
 local aurasAppliedOnTarget = {"Moco adhesivo volátil", "Hinchazón gaseosa", "Consumo de alma", "Combustión ígnea"}
 
-local aurasAppliedOnTargetCDS = {"Reencarnación", "Defensor candente", "Instintos de supervivencia", "Divine Protection", "Ice Block", "Dispersion", "Muro de escudos", "Escudo divino", "Entereza ligada al hielo", "Himno divino", "Himno de esperanza", "Tótem Marea de maná", "Ojos crepusculares", "Maestría en auras"}
+local aurasAppliedOnTargetCDS = {"Defensor candente"}
 -- "Piel de corteza", "Égida de Dalaran", "Defensa iracunda",
 
 --| Output: [Spell] applied on Target1, Target2, Target3 ... |--
@@ -527,7 +528,7 @@ end
 
 local function TimerHandler(name, ...)
     if name == "Spell AOE Damage" then
-        local SpellID = ...
+        local SpellID, sourceName = ...
         --local SpellName = GetSpellInfo(SpellID)
 
         local arraySelf = {}
@@ -537,8 +538,12 @@ local function TimerHandler(name, ...)
             table.insert(arraySelf,unit(Target).." ("..numformat(Data.Amount)..")")
             table.insert(arrayRaid,Target.." ("..numformat(Data.Amount)..")")
         end
-        MPR:HandleReport(string.format("%s hits: %s",spell(SpellID,true),table.concat(arrayRaid,", ")), string.format("%s hits: %s",spell(SpellID),table.concat(arraySelf,", ")))
-        
+		if SpellID == 71046 then
+			MPR:HandleReport(string.format("%s %s hits: %s",sourceName,spell(SpellID,true),table.concat(arrayRaid,", ")), string.format("%s %s hits: %s",sourceName,spell(SpellID),table.concat(arraySelf,", ")))
+		else
+			MPR:HandleReport(string.format("%s hits: %s",spell(SpellID,true),table.concat(arrayRaid,", ")), string.format("%s hits: %s",spell(SpellID),table.concat(arraySelf,", ")))
+        end
+		
         if MPR_Penalties.PenaltySpells[nameSpellAOEDamage] then
             MPR_Penalties:HandleHits(targetsSpellAOEDamage,MPR_Penalties.PenaltySpells[nameSpellAOEDamage][1],SpellID)
         end
@@ -1057,6 +1062,7 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                     MPR_Timers:ManaBarrierRemoved()
                 end
             end
+			
         elseif event == "SPELL_CAST_START" or event == "SPELL_CAST_SUCCESS" then
 			
             -- 1: Lord Tuétano timers
@@ -1235,7 +1241,7 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                 end
                 
                 self:CancelTimer("Spell AOE Damage")
-                self:ScheduleTimer("Spell AOE Damage", TimerHandler, 0.5, spellId)
+                self:ScheduleTimer("Spell AOE Damage", TimerHandler, 0.5, spellId, sourceName)
                 
                 targetsSpellAOEDamage[destName] = {Amount = amount, Overkill = overkill}
             elseif contains(reportDamageOnTarget,destName) then
@@ -1340,6 +1346,11 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
 			end
 			
             if contains(aurasAppliedOnTarget,spellName) and UnitIsPlayer(destName) then
+                if destName == UnitName("player") and contains(sayAuraOnMe,spellName) then
+                    self:Say(sayAuraOnMe[spellName])
+                end
+                self:ReportAppliedOnTarget(spellId,destName)
+			elseif contains(aurasAppliedOnTargetCDS,spellName) and UnitIsPlayer(destName) then
                 if destName == UnitName("player") and contains(sayAuraOnMe,spellName) then
                     self:Say(sayAuraOnMe[spellName])
                 end
