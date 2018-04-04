@@ -255,7 +255,7 @@ local npcsBossSpellSumon = {"Sombra vengativa"} -- Boss summons, destination is 
 -- Casts (SPELL_CAST_START and SPELL_CAST_SUCCESS) --
 --| Output: Unit casts [Spell]. |--
 --"Remorseless Winter", "Quake", "Dark Vortex", "Light Vortex", "Blessing of Forgotten Kings"
-local spellsCast = {"Drums of the Wild", "Himno divino", "Himno de esperanza", "Tótem Marea de maná", "Ojos crepusculares", "Maestría en auras", "Reencarnación", "Instintos de supervivencia", "Bloque de hielo", "Dispersion", "Muro de escudos", "Escudo divino", "Entereza ligada al hielo"}
+local spellsCast = {"Drums of the Wild", "Himno divino", "Himno de esperanza", "Tótem Marea de maná", "Ojos crepusculares", "Maestría en auras", "Reencarnación", "Instintos de supervivencia", "Bloque de hielo", "Dispersion", "Muro de escudos", "Escudo divino", "Entereza ligada al hielo", "Sacrificio divino"}
 --| Output: Unit casts [Spell] on Target. |--
 local spellsCastOnTarget = {"Estimular", "Renacer", "Mano de sacrificio", "Supresión de dolor", "Ángel guardián", "Imposición de manos"}
 --| Output: [Spell] on Target. |--
@@ -1191,7 +1191,7 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
 			if contains(spellsCast,spellName) then
                 self:ReportCast(sourceName,spellId)
             elseif contains(spellsCastOnTarget,spellName) then
-                self:ReportCastOnTarget(sourceName,destName,spellId)
+				self:ReportCastOnTarget(sourceName,destName,spellId)
             elseif contains(spellsBossCastOnTarget,spellName) then
                 self:ReportBossCastOnTarget(spellId,destName)
             end
@@ -1282,7 +1282,7 @@ function MPR:COMBAT_LOG_EVENT_UNFILTERED(...)
                 
 				-- Infestar
 				if spellName == "Infestar" and UnitInRaid(destName) then 
-                    if amount > 8000 then
+                    if amount > 7000 then
 						self:HandleReport(string.format("%s tiene %s con %i de daño.", destName, GetSpellLink(spellId), amount))
                     end
                 end
@@ -1499,6 +1499,10 @@ end
 
 --[[ SPELL_CAST_START, SPELL_CAST_SUCCESS ]]--
 function MPR:ReportCast(UNIT,SPELL) -- Unit casts [Spell].
+				if (spell == 75490 or spell == 75495) then 
+					local _,itemlink = GetItemInfo(54573)
+					self:HandleReport(string.format("%s uses %s",UNIT,itemlink), string.format("%s uses %s",unit(UNIT),itemlink))
+				else
     self:HandleReport(string.format("%s casts %s",UNIT,spell(SPELL,true)), string.format("%s casts %s",unit(UNIT),spell(SPELL)))
 end
 function MPR:ReportCastOnTarget(UNIT,TARGET,SPELL) -- Unit casts [Spell] on Target.
