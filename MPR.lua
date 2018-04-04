@@ -1499,11 +1499,12 @@ end
 
 --[[ SPELL_CAST_START, SPELL_CAST_SUCCESS ]]--
 function MPR:ReportCast(UNIT,SPELL) -- Unit casts [Spell].
-				if (spell == 75490 or spell == 75495) then 
-					local _,itemlink = GetItemInfo(54573)
-					self:HandleReport(string.format("%s uses %s",UNIT,itemlink), string.format("%s uses %s",unit(UNIT),itemlink))
-				else
-    self:HandleReport(string.format("%s casts %s",UNIT,spell(SPELL,true)), string.format("%s casts %s",unit(UNIT),spell(SPELL)))
+	if (spell == 75490 or spell == 75495) then 
+		local _,itemlink = GetItemInfo(54573)
+		self:HandleReport(string.format("%s uses %s",UNIT,itemlink), string.format("%s uses %s",unit(UNIT),itemlink))
+	else
+		self:HandleReport(string.format("%s casts %s",UNIT,spell(SPELL,true)), string.format("%s casts %s",unit(UNIT),spell(SPELL)))
+	end
 end
 function MPR:ReportCastOnTarget(UNIT,TARGET,SPELL) -- Unit casts [Spell] on Target.
     self:HandleReport(string.format("%s casts %s on %s",UNIT,spell(SPELL,true),TARGET), string.format("%s casts %s on %s",unit(UNIT),spell(SPELL),unit(TARGET)))
