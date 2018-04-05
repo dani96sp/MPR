@@ -264,7 +264,7 @@ local spellsBossCastOnTarget = {"Runa sangrienta", "Gas inmundo", "Sombras enjam
 -- Auras (SPELL_AURA_APPLIED, SPELL_AURA_APPLIED_DOSE, SPELL_AURA_STOLEN) --
 --| Output: [Spell] applied on Target. |--
 --| Filter: UnitIsPlayer(Target)
-local aurasAppliedOnTarget = {"Moco adhesivo volátil", "Hinchazón gaseosa", "Consumo de alma", "Combustión ígnea"}
+local aurasAppliedOnTarget = {"Moco adhesivo volátil", "Hinchazón gaseosa", "Consumo de alma", "Combustión ígnea", "Gas asfixiante"}
 
 local aurasAppliedOnTargetCDS = {"Defensor candente"}
 -- "Piel de corteza", "Égida de Dalaran", "Defensa iracunda",
